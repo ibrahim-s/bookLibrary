@@ -1,7 +1,7 @@
 # My Arabic Library #
 
 Author: Ibrahim Hamadeh  
-Download [Development version 1.0](https://github.com/ibrahim-s/myLibrary/releases/download/v1.0/myArabicLibrary-1.0-dev.nvda-addon)  
+Download [Development version 1.0](https://github.com/ibrahim-s/myLibrary/releases/download/v1.0/myArabicLibrary1.0-dev.nvda-addon)  
 
 This addon helps the user to arrange his downloadable books in library like way.  
 From the main dialog of libraries, you can choose the library you like and press enter on it.  

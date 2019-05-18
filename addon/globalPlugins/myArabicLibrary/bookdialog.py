@@ -329,7 +329,7 @@ class BookDialog(wx.Dialog):
 		self.PopupMenu(MyPopupMenu(self, id), e.GetPosition())
 
 	def onKillFocus(self, evt):
-		log.info('under kill focus event')
+		#log.info('under kill focus event')
 		i= self.listBox.GetSelection()
 		if i== -1:
 			self.sizeText.Hide()
@@ -362,7 +362,7 @@ class BookDialog(wx.Dialog):
 			control.Hide()
 
 	def onDownload(self, evt):
-		log.info('under onDownload handler')
+		#log.info('under onDownload handler')
 		i= self.listBox.GetSelection()
 		if i!= -1:
 			try:
@@ -380,13 +380,13 @@ class BookDialog(wx.Dialog):
 			queueHandler.queueFunction(queueHandler.eventQueue, webbrowser.open, url)
 
 	def onCancel(self, evt):
-		log.info('under onCancel') 
+		#log.info('under onCancel') 
 		if Book.myBooks:
 			Book.save_to_file()
 		self.Destroy()
 """
 	def __del__(self):
-		log.info('under __del__')
+		#log.info('under __del__')
 		if Book.myBooks:
 			Book.save_to_file()
 """

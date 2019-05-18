@@ -83,7 +83,7 @@ class LibraryPopupMenu(wx.Menu):
 		)
 		if dlg.ShowModal() == wx.ID_OK:
 			path_chosen= dlg.GetPath()
-			log.info(path_chosen)
+			#log.info(path_chosen)
 		dlg.Destroy()
 		if path_chosen:
 			html_path= os.path.join(path_chosen, library_name+ '.html')
@@ -140,7 +140,7 @@ class ChooseLibrary(wx.Dialog):
 		self.Show()
 
 	def OnRightDown(self, e):
-		log.info('under right down handler') 
+		#log.info('under right down handler') 
 		obj= e.GetEventObject()
 		id= obj.GetId()
 		self.PopupMenu(LibraryPopupMenu(self, id), e.GetPosition())

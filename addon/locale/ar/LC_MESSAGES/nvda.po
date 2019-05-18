@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 'myArabicLibrary' '1.0'\n"
+"Project-Id-Version: 'myArabicLibrary' '1.1-dev'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@freelists.org'\n"
-"POT-Creation-Date: 2019-02-08 04:07+0200\n"
-"PO-Revision-Date: 2019-02-08 04:36+0200\n"
+"POT-Creation-Date: 2019-05-18 06:30+0300\n"
+"PO-Revision-Date: 2019-05-18 17:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar\n"
@@ -32,7 +32,7 @@ msgstr "إسم الكتاب مطلوب; لا يمكن تركه فارغا"
 
 #. Translators: Title of dialog.
 #: addon\globalPlugins\myArabicLibrary\bookdialog.py:27
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:59
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:158
 msgid "information"
 msgstr "تعليمات"
 
@@ -46,8 +46,8 @@ msgstr "هذا الرابط موجود للكتاب {} لصاحبه {}; الرج
 #. Translators: Title of message box.
 #: addon\globalPlugins\myArabicLibrary\bookdialog.py:67
 #: addon\globalPlugins\myArabicLibrary\bookdialog.py:83
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:198
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:211
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:204
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:217
 msgid "Warning"
 msgstr "تنبيه"
 
@@ -86,15 +86,73 @@ msgstr "حذف الكتاب"
 msgid "Remove All "
 msgstr "حذف جميع الكتب"
 
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:153
+msgid "EnterBook Name Please"
+msgstr "أَدخل إسم الكتاب فضلاً"
+
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:154
+msgid "Book Name"
+msgstr "إسم الكتاب"
+
+#. log.info('name: %s'%name)
+#. getting the author
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:158
+msgid "Enter Author Name"
+msgstr "أدخل إسم المؤلف"
+
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:159
+msgid "Author name"
+msgstr "إسم المؤلف"
+
+#. getting the about of the book
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:165
+msgid "Write Something About The Book"
+msgstr "نَبذة عن الكتاب"
+
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:166
+msgid "About"
+msgstr "عن الكتاب"
+
+#. getting size of book
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:168
+msgid "Enter Size of Book or file"
+msgstr "حجم الملف أو الكتاب"
+
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:169
+msgid "size"
+msgstr "حجم الكتاب"
+
+#. log.info('size: %s'%size)
+#. getting the url of the book
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:173
+msgid "Enter Url source to download book file(www...)"
+msgstr "أَدخل رابط الكتاب)www...("
+
+#. Translators: Label of the text control that shows the url .
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:174
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:255
+msgid "Url:"
+msgstr "الرابط:"
+
+#. log.info('url: %s'%url)
+#. getting url2
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:178
+msgid "Enter another url if present, or leave blank"
+msgstr "أَدخل رابط آخر إذا كان موجودا, أو أتركه فارغا"
+
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:179
+msgid "Another url:"
+msgstr "رابط آخر:"
+
 #. Translators: Message displayed when trying to remove a book.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:196
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:202
 msgid "Are you sure you want to remove {} by {}?, this can not be undone."
 msgstr ""
 "هل أنت متأكد من أنك تريد حذف كتاب {} لصاحبه {}?, هذا الإجراء لا يمكن التراجع "
 "عنه."
 
 #. Translators: Message displayed when trying to remove all books.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:209
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:215
 msgid ""
 "Are you sure you want to remove all books from this library?, this can not be "
 "undone."
@@ -103,46 +161,67 @@ msgstr ""
 "التراجع عنه."
 
 #. Translators: Label of about the book text control.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:237
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:243
 msgid "About The Book"
 msgstr "لمحة عن الكتاب"
 
 #. Translators: Label of size of book file text control.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:244
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:250
 msgid "Size of Book:"
 msgstr "حجم الكتاب"
 
-#. Translators: Label of the text control that shows the url .
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:249
-msgid "Url:"
-msgstr "الرابط:"
-
 #. Translators: Label of text control that displays the another url.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:255
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:261
 msgid "Another Url:"
 msgstr "رابط آخر:"
 
 #. self.anotherUrlText.SetSelection(0, -1)
 #. Translators: Label of download file button.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:261
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:267
 msgid "Download File"
 msgstr "تنزيل الملف"
 
 #. Label of Cancel button.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:263
+#: addon\globalPlugins\myArabicLibrary\bookdialog.py:269
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:28
+#. Translators: label obj menu items to export a library as html.
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:60
+msgid "Export Library as html"
+msgstr "تصدير المكتبة بصيغةْ html"
+
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:72
+msgid "Failed to open library, or may be library selected is empty."
+msgstr "تصدير المكتبة قدفشل, أو ربما قد تكون المكتبة فارغة"
+
+#. Translators:title of message dialog
+#. Translators: title of error dialog .
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:74
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:97
+msgid "Error"
+msgstr "خطَأ"
+
+#. Translators: message of error dialog displayed when cannot export library file.
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:95
+msgid "Failed to export library"
+msgstr "تصدير المكتبة قد فَشل"
+
+#. Translators: Message presented when library has been exported.
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:103
+msgid "Information: Library Exported"
+msgstr "المكتبة قد تم تصديرها"
+
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:122
 msgid "OK"
 msgstr "موافق"
 
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:32
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:126
 msgid "cancel"
 msgstr "إلغاء"
 
 #. Translators: Message be displayed when a library dialog is already opened.
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:57
+#: addon\globalPlugins\myArabicLibrary\maindialog.py:156
 msgid "A library dialog is already opened; Close it first please."
 msgstr "هناك محاورة لمكتبة أخرى مفتوحة; أغلقها أولاً لو سمحت."
 

@@ -1,7 +1,7 @@
 # My Arabic Library #
 
 Author: Ibrahim Hamadeh  
-Download [Development version 1.0](https://github.com/ibrahim-s/myLibrary/releases/download/v1.0/myArabicLibrary1.0-dev.nvda-addon)  
+Download [Development version 1.1](https://github.com/ibrahim-s/myLibrary/releases/download/v1.1-dev/myArabicLibrary-1.1-dev.nvda-addon)  
 
 This addon helps the user to arrange his downloadable books in library like way.  
 From the main dialog of libraries, you can choose the library you like and press enter on it.  
@@ -21,6 +21,15 @@ NVDA menu>preferences>inputGestures>My Arabic Library.
 *	Moreover from there you can sort the books, by either title or author.  
 *	If you want to download a book with the default or first link, just stand on it and press ente.  
 *	If you want to download it with the second or another link, tab to that another link and press enter on it.  
+*	Lastly do you want to export any library as html file, Yes you can  
+*	Stand on the library you want to export and press the contact menu, arrow down once to Export library as html and press enter.  
+*	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
+*	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
+
+### Changes for version 1.1 ###
+
+*	Added export feature to library list, so that you can now export any library as html file.  
+*	modifying the sorting feature in book list, showing name and author in a better way.  
 
 ### Changes for 1.0 ###
 

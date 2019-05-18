@@ -8,7 +8,8 @@ except ImportError:
 
 import os
 
-SAVING_DIR= os.path.join(os.path.dirname(__file__), "..", "..", "mydata")
+CURRENT_DIR= os.path.dirname(__file__).decode("mbcs")
+SAVING_DIR= os.path.join(CURRENT_DIR, "..", "..", "mydata")
 
 class Book(object):
 	myBooks={}

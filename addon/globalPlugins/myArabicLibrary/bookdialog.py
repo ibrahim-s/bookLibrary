@@ -150,27 +150,33 @@ class MyPopupMenu(wx.Menu):
 		else: pass
 
 	def onAdd(self, e= None, book= None):
-		name=getBookName('EnterBook Name Please', 'Book Name', book)
-		log.info('name: %s'%name)
+		name=getBookName(_('EnterBook Name Please'), 
+		_('Book Name'), book)
+		#log.info('name: %s'%name)
 
 		#getting the author
-		author= getBookAuthor('Enter Author Name', 'Author name', book)
-		log.info('author: %s'%author)
-		#print author
+		author= getBookAuthor(_('Enter Author Name'), 
+		_('Author name'), book)
+		#log.info('author: %s'%author)
 		if (name, author) in Book.myBooks:
 			gui.messageBox('This book already exist in library, please enter a new one or remove existed first', 'Warning')
 			return
 		#getting the about of the book
-		about= getBookAbout("Write Something About The Book", "About", book)
+		about= getBookAbout(_("Write Something About The Book"), 
+		_("About"), book)
 		#getting size of book
-		size= getBookSize("Enter Size of Book or file", "size", book)
-		log.info('size: %s'%size)
+		size= getBookSize(_("Enter Size of Book or file"), 
+		_("size"), book)
+		#log.info('size: %s'%size)
+
 		#getting the url of the book
-		url= getBookUrl('Enter Url source to download book file(www...)', 'Url:', book)
-		log.info('url: %s'%url)
+		url= getBookUrl(_('Enter Url source to download book file(www...)'), 
+		_('Url:'), book)
+		#log.info('url: %s'%url)
 
 		#getting url2
-		url2= getBookUrl2('Enter another url if present, or leave blank', 'Another url:', book)
+		url2= getBookUrl2(_('Enter another url if present, or leave blank'), 
+		_('Another url:'), book)
 		Book.add_book(name, author, about, size, url, url2)
 		sortingFlag= BookDialog.sortByAuthor
 		self.parent.populateListBox(sortingFlag)
@@ -291,11 +297,13 @@ class BookDialog(wx.Dialog):
 			_keys = [k for k in Book.myBooks]
 			if not sortByAuthor:
 				BookDialog.book_keys= sorted(_keys)
-				lst= [key[0]+' by '+key[1] for key in self.book_keys]
+				#lst= [key[0]+' by '+key[1] for key in self.book_keys]
+				lst= map(lambda x: x[0]+ u' تأليف '+x[1] if x[1] else x[0], [key for key in self.book_keys])
 			else:
 				temp= sorted([(j, i) for i, j in _keys])
 				BookDialog.book_keys= [(name, author) for author, name in temp]
-				lst= [author+'; '+name for author, name in temp]
+				#lst= [author+'; '+name for author, name in temp]
+				lst= map(lambda (x,y): x+u' في '+y if x else y, temp)
 			self.listBox.Set(lst)
 		self.numberOfBooks= len(self.book_keys)
 		self.SetTitle(u"{}({})".format(self.filename, self.numberOfBooks))

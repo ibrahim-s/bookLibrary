@@ -9,7 +9,7 @@ except ImportError:
 import os
 
 CURRENT_DIR= os.path.dirname(__file__).decode("mbcs")
-SAVING_DIR= os.path.join(CURRENT_DIR, "..", "..", "mydata")
+SAVING_DIR= os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')
 
 class Book(object):
 	myBooks={}

@@ -1,18 +1,34 @@
-# myArabicLibrary 
+# installTasks for bookLibrary
 # required to keep or reserve files already present 
-# Borrowed from Golden Cursor addon, thanks to people behind it.
 
 import addonHandler
 import os
 import shutil
+import globalVars
 
 def onInstall():
-	oldPath = os.path.join(os.path.dirname(__file__), "..", "myArabicLibrary", "mydata")
-	#The new version of the addon will have .pending suffix , and the old one will retain it's name.
-	newPath = os.path.join(os.path.dirname(__file__), "mydata")
-	if os.path.exists(oldPath):
+	userPath= os.path.expanduser('~')
+	addon_data_path= os.path.join(userPath, "bookLibrary-addonFiles")
+	# path exists, so data files are present in it, and only we remove data folder in addon package.
+	if os.path.exists(addon_data_path):
 		try:
-			shutil.rmtree(newPath)
-			shutil.copytree(oldPath, newPath)
-		except (IOError, WindowsError):
+			shutil.rmtree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), ignore_errors=True)
+		except:
 			pass
+		return
+
+	for addon in addonHandler.getAvailableAddons():
+		if addon.name == "myArabicLibrary":
+			addon.requestRemove()
+			try:
+				shutil.copytree(os.path.join(globalVars.appArgs.configPath, "addons", "myArabicLibrary", "mydata"), addon_data_path)
+				shutil.rmtree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), ignore_errors=True)
+			except:
+				pass
+			return
+
+	try:
+		shutil.copytree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), addon_data_path)
+		shutil.rmtree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), ignore_errors=True)
+	except Exception as e:
+			log.debug('failed to copy or remove data files', exc_info=1)

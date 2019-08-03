@@ -6,9 +6,10 @@ except ImportError:
 
 #.decode("mbcs")
 
-import os
+import os, sys
 
-CURRENT_DIR= os.path.dirname(__file__).decode("mbcs")
+CURRENT_DIR= os.path.dirname(__file__).decode("mbcs") if sys.version_info.major == 2 else os.path.dirname(__file__)
+
 SAVING_DIR= os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')
 
 class Book(object):
@@ -83,9 +84,3 @@ class Book(object):
 		if key:
 			book= cls.getBookByKey(key[0])
 			return book
-
-if __name__== '__main__':
-	#Book.add_book('book1', 'author1', 'about1', 'size1', 'url1', 'url2')
-	#Book.save_to_file()
-	Book.retreave_from_file('test.pickle')
-	print Book.myBooks

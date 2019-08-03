@@ -10,7 +10,7 @@ except ImportError:
 
 import wx, gui, ui
 import core
-import os
+import os, sys
 import codecs
 from logHandler import log
 from .books import Book
@@ -20,7 +20,7 @@ import addonHandler
 addonHandler.initTranslation()
 
 CURRENT_DIR= os.path.dirname(os.path.abspath(__file__))
-LIBRARIES_DIR= os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')).decode("mbcs")
+LIBRARIES_DIR= os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')).decode("mbcs") if sys.version_info.major == 2 else os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles'))
 
 def makeHtmlFile(libraryName, libraryData, newpath):
 	''' Make Html file out of pickle library file.'''
@@ -30,7 +30,7 @@ def makeHtmlFile(libraryName, libraryData, newpath):
 <title>{} </title>
 		</head><body>
 		<h1>{}</h1>
-		<ol>""".format(u'مكتبتي العربية', libraryName)
+		<ol>""".format(u'مكتبتي', libraryName)
 		)
 		for name, author, about, size, url, url2 in libraryData:
 			html.write(u'<li><h2>{} {}</h2>'.format(name, u' تأليف '+author if author else author))
@@ -132,7 +132,7 @@ class ChooseLibrary(wx.Dialog):
 	def postInit(self):
 		#foundFiles= os.listdir(os.path.join(CURRENT_DIR,'..', '..', 'mydata'))
 		foundFiles= os.listdir(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles'))
-		libraryFiles= sorted([os.path.splitext(f)[0].decode("mbcs") for f in foundFiles])
+		libraryFiles= sorted([os.path.splitext(f)[0].decode("mbcs") for f in foundFiles]) if sys.version_info.major == 2 else sorted([os.path.splitext(f)[0] for f in foundFiles])
 		self.libraryFiles= libraryFiles
 		self.listBox.Set(libraryFiles)
 		self.listBox.SetSelection(0)

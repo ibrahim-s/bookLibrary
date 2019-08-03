@@ -24,7 +24,7 @@ moreover with context menu  on list of books you can add, edit, remove, remove a
 you can open the main dialog of libraries with the shortcut: nvda+control+windows+a
 And as always you can change this command via: nvda menu> preferences>input gestures> book library."""),
 	# version
-	"addon_version" : "2.0-dev",
+	"addon_version" : "2.1-dev",
 	# Author(s)
 	"addon_author" : u"ibrahim hamadeh <ibra.hamadeh@hotmail.com>",
 	# URL for the add-on documentation support

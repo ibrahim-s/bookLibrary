@@ -1,7 +1,9 @@
 # Book Library #
 
 Author: Ibrahim Hamadeh  
-Download [Development version 2.0](https://github.com/ibrahim-s/myLibrary/releases/download/v2.0-dev/myArabicLibrary-2.0-dev.nvda-addon)  
+NVDA compatibility: 2018.3.0 to 2019.3.0  
+Python3 compatibility: Yes  
+Download [Development version 2.1](https://github.com/ibrahim-s/myLibrary/releases/download/v2.1-dev/myArabicLibrary-2.1-dev.nvda-addon)  
 
 This addon helps the user to arrange his downloadable books in library like way.  
 From the main dialog of libraries, you can choose the library you like and press enter on it.  
@@ -25,6 +27,10 @@ NVDA menu>preferences>inputGestures>Book Library.
 *	Stand on the library you want to export and press the contact menu, arrow down once to Export library as html and press enter.  
 *	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
 *	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
+
+### Changes for version 2.1 ###
+
+*	Added compatibility with python3  
 
 ### Changes for version 2.0 ###
 

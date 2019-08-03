@@ -1,7 +1,9 @@
 # مكتبةْ الكتب #
 
 تصميم: ابراهيم حمادة  
-Download [version 2.0](https://github.com/ibrahim-s/myLibrary/releases/download/v2.0-dev/myArabicLibrary-2.0-dev.nvda-addon)  
+التوافق مع إصدارات NVDA: 2018.3.0 to 2019.3.0  
+التوافق مع بايثون3: نعم  
+Download [version 2.1](https://github.com/ibrahim-s/myLibrary/releases/download/v2.1-dev/myArabicLibrary-2.1-dev.nvda-addon)  
 
 هذه الإضافة تساعد على تنظيم و ترتيب الكتب التي يتم تنزيلها من الإنترنت.  
 من المحاورة الرءيسية يمكنك إختيار المكتبة التي تريد, و إضغط عليها إنتر.  
@@ -26,6 +28,9 @@ Download [version 2.0](https://github.com/ibrahim-s/myLibrary/releases/download/
 *	ستفتح محاورة لاختيار المجلد الذي تريد تصدير المكتبة إليه, إختر المجلد الذي تريد و اضغطْ إنتر, أو تحرك بالتاب إلى زر "Select folder" و اضغطْ عليه إنتر.  
 *	تمام , لقد تم الأمر, ستسمع رسالة تقول أنه قد تم تصدير المكتبة, و مبروك عليك.  
 
+### التغييرات في إصدار 2.1 ###
+*	جعل الإضافة متوافقة مع بايثون3  
+ 
 ### التغييرات في إصدار 2.0 ###
 
 *	تغيير إسم الإضافة من مكتبتي العربية إلى مكتبةْ الكتب.  

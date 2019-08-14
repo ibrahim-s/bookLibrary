@@ -29,6 +29,15 @@ def onInstall():
 				pass
 			return
 
+	#myArabicLibrary not found, we deal with the bookLibrary being installed.
+	# if path exists, so data files are present in it, and only we remove data folder in addon package.
+	if os.path.exists(addon_data_path):
+		try:
+			shutil.rmtree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), ignore_errors=True)
+		except:
+			pass
+		return
+
 	try:
 		shutil.copytree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), addon_data_path)
 		shutil.rmtree(os.path.join(os.path.dirname(__file__), 'bookLibrary-addonFiles'), ignore_errors=True)

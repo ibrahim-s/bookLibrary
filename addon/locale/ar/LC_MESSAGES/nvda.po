@@ -5,154 +5,161 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 'myArabicLibrary' '1.1-dev'\n"
+"Project-Id-Version: 'bookLibrary' '2.0-dev'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@freelists.org'\n"
-"POT-Creation-Date: 2019-05-18 06:30+0300\n"
-"PO-Revision-Date: 2019-05-18 17:20+0300\n"
+"POT-Creation-Date: 2019-07-25 03:02+0300\n"
+"PO-Revision-Date: 2019-07-25 03:39+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && "
-"n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n"
+"%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on to be shown on installation and add-on information.
+#: addon\globalPlugins\bookLibrary\__init__.py:16
+#: addon\globalPlugins\bookLibrary\maindialog.py:108 buildVars.py:17
+msgid "Book Library"
+msgstr "مكتبةْ الكتب"
+
 #. Translators: message displayed in input help mode for openning  choose library dialog.
-#: addon\globalPlugins\myArabicLibrary\__init__.py:26
-msgid "Open My Arabic Library dialog."
-msgstr "فتح محاورةْ مكتبتي العربية."
+#: addon\globalPlugins\bookLibrary\__init__.py:28
+msgid "Open Book Library dialog."
+msgstr "فتح محاورةْ مكتبةْ الكتب"
 
 #. Translators: message displayed when the user leaves the book name entry blank.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:26
+#: addon\globalPlugins\bookLibrary\bookdialog.py:26
 msgid "Name required; You can not leave it blank"
 msgstr "إسم الكتاب مطلوب; لا يمكن تركه فارغا"
 
 #. Translators: Title of dialog.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:27
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:158
+#: addon\globalPlugins\bookLibrary\bookdialog.py:27
+#: addon\globalPlugins\bookLibrary\maindialog.py:158
 msgid "information"
 msgstr "تعليمات"
 
 #. Translators: message displayed when the url is present for another book.
 #. Translators: message displayed when url2 is present for another book.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:66
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:82
+#: addon\globalPlugins\bookLibrary\bookdialog.py:66
+#: addon\globalPlugins\bookLibrary\bookdialog.py:82
 msgid "This url is present for book {} by {}; please enter another one"
 msgstr "هذا الرابط موجود للكتاب {} لصاحبه {}; الرجاء إدخال رابط غيره."
 
 #. Translators: Title of message box.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:67
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:83
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:204
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:217
+#: addon\globalPlugins\bookLibrary\bookdialog.py:67
+#: addon\globalPlugins\bookLibrary\bookdialog.py:83
+#: addon\globalPlugins\bookLibrary\bookdialog.py:204
+#: addon\globalPlugins\bookLibrary\bookdialog.py:217
 msgid "Warning"
 msgstr "تنبيه"
 
 #. Translators: label of men to sort books according to book name.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:99
+#: addon\globalPlugins\bookLibrary\bookdialog.py:99
 msgid "Sort Books By Name"
 msgstr "إسم الكتاب"
 
 #. Translators: label of menu to sort books according to author name.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:102
+#: addon\globalPlugins\bookLibrary\bookdialog.py:102
 msgid "Sort Books By Author"
 msgstr "إسم المؤلف"
 
 #. Translators: label obj subMenu items for sorting books.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:105
+#: addon\globalPlugins\bookLibrary\bookdialog.py:105
 msgid "Sort Books By"
 msgstr "عرض الكتب حسب"
 
 #. Translators: label obj menu items to add a book.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:112
+#: addon\globalPlugins\bookLibrary\bookdialog.py:112
 msgid "Add A Book"
 msgstr "إضافةْ كتاب"
 
 #. Translators: label of menu items to edit a book.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:119
+#: addon\globalPlugins\bookLibrary\bookdialog.py:119
 msgid "Edit Selected "
 msgstr "تعديل الكتاب"
 
 #. Translators: label of menu items to remove a book.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:126
+#: addon\globalPlugins\bookLibrary\bookdialog.py:126
 msgid "Remove Selected "
 msgstr "حذف الكتاب"
 
 #. Translators: label of menu items to remove all books.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:133
+#: addon\globalPlugins\bookLibrary\bookdialog.py:133
 msgid "Remove All "
 msgstr "حذف جميع الكتب"
 
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:153
+#: addon\globalPlugins\bookLibrary\bookdialog.py:153
 msgid "EnterBook Name Please"
 msgstr "أَدخل إسم الكتاب فضلاً"
 
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:154
+#: addon\globalPlugins\bookLibrary\bookdialog.py:154
 msgid "Book Name"
 msgstr "إسم الكتاب"
 
 #. log.info('name: %s'%name)
 #. getting the author
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:158
+#: addon\globalPlugins\bookLibrary\bookdialog.py:158
 msgid "Enter Author Name"
 msgstr "أدخل إسم المؤلف"
 
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:159
+#: addon\globalPlugins\bookLibrary\bookdialog.py:159
 msgid "Author name"
 msgstr "إسم المؤلف"
 
 #. getting the about of the book
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:165
+#: addon\globalPlugins\bookLibrary\bookdialog.py:165
 msgid "Write Something About The Book"
 msgstr "نَبذة عن الكتاب"
 
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:166
+#: addon\globalPlugins\bookLibrary\bookdialog.py:166
 msgid "About"
 msgstr "عن الكتاب"
 
 #. getting size of book
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:168
+#: addon\globalPlugins\bookLibrary\bookdialog.py:168
 msgid "Enter Size of Book or file"
 msgstr "حجم الملف أو الكتاب"
 
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:169
+#: addon\globalPlugins\bookLibrary\bookdialog.py:169
 msgid "size"
 msgstr "حجم الكتاب"
 
 #. log.info('size: %s'%size)
 #. getting the url of the book
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:173
+#: addon\globalPlugins\bookLibrary\bookdialog.py:173
 msgid "Enter Url source to download book file(www...)"
 msgstr "أَدخل رابط الكتاب)www...("
 
 #. Translators: Label of the text control that shows the url .
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:174
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:255
+#: addon\globalPlugins\bookLibrary\bookdialog.py:174
+#: addon\globalPlugins\bookLibrary\bookdialog.py:255
 msgid "Url:"
 msgstr "الرابط:"
 
 #. log.info('url: %s'%url)
 #. getting url2
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:178
+#: addon\globalPlugins\bookLibrary\bookdialog.py:178
 msgid "Enter another url if present, or leave blank"
 msgstr "أَدخل رابط آخر إذا كان موجودا, أو أتركه فارغا"
 
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:179
+#: addon\globalPlugins\bookLibrary\bookdialog.py:179
 msgid "Another url:"
 msgstr "رابط آخر:"
 
 #. Translators: Message displayed when trying to remove a book.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:202
+#: addon\globalPlugins\bookLibrary\bookdialog.py:202
 msgid "Are you sure you want to remove {} by {}?, this can not be undone."
 msgstr ""
 "هل أنت متأكد من أنك تريد حذف كتاب {} لصاحبه {}?, هذا الإجراء لا يمكن التراجع "
 "عنه."
 
 #. Translators: Message displayed when trying to remove all books.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:215
+#: addon\globalPlugins\bookLibrary\bookdialog.py:215
 msgid ""
 "Are you sure you want to remove all books from this library?, this can not be "
 "undone."
@@ -161,75 +168,69 @@ msgstr ""
 "التراجع عنه."
 
 #. Translators: Label of about the book text control.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:243
+#: addon\globalPlugins\bookLibrary\bookdialog.py:243
 msgid "About The Book"
 msgstr "لمحة عن الكتاب"
 
 #. Translators: Label of size of book file text control.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:250
+#: addon\globalPlugins\bookLibrary\bookdialog.py:250
 msgid "Size of Book:"
 msgstr "حجم الكتاب"
 
 #. Translators: Label of text control that displays the another url.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:261
+#: addon\globalPlugins\bookLibrary\bookdialog.py:261
 msgid "Another Url:"
 msgstr "رابط آخر:"
 
 #. self.anotherUrlText.SetSelection(0, -1)
 #. Translators: Label of download file button.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:267
+#: addon\globalPlugins\bookLibrary\bookdialog.py:267
 msgid "Download File"
 msgstr "تنزيل الملف"
 
 #. Label of Cancel button.
-#: addon\globalPlugins\myArabicLibrary\bookdialog.py:269
+#: addon\globalPlugins\bookLibrary\bookdialog.py:269
 msgid "Cancel"
 msgstr "إلغاء"
 
 #. Translators: label obj menu items to export a library as html.
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:60
+#: addon\globalPlugins\bookLibrary\maindialog.py:60
 msgid "Export Library as html"
 msgstr "تصدير المكتبة بصيغةْ html"
 
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:72
+#: addon\globalPlugins\bookLibrary\maindialog.py:72
 msgid "Failed to open library, or may be library selected is empty."
 msgstr "تصدير المكتبة قدفشل, أو ربما قد تكون المكتبة فارغة"
 
 #. Translators:title of message dialog
 #. Translators: title of error dialog .
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:74
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:97
+#: addon\globalPlugins\bookLibrary\maindialog.py:74
+#: addon\globalPlugins\bookLibrary\maindialog.py:97
 msgid "Error"
 msgstr "خطَأ"
 
 #. Translators: message of error dialog displayed when cannot export library file.
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:95
+#: addon\globalPlugins\bookLibrary\maindialog.py:95
 msgid "Failed to export library"
 msgstr "تصدير المكتبة قد فَشل"
 
 #. Translators: Message presented when library has been exported.
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:103
+#: addon\globalPlugins\bookLibrary\maindialog.py:103
 msgid "Information: Library Exported"
 msgstr "المكتبة قد تم تصديرها"
 
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:122
+#: addon\globalPlugins\bookLibrary\maindialog.py:121
 msgid "OK"
 msgstr "موافق"
 
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:126
+#: addon\globalPlugins\bookLibrary\maindialog.py:125
 msgid "cancel"
 msgstr "إلغاء"
 
 #. Translators: Message be displayed when a library dialog is already opened.
-#: addon\globalPlugins\myArabicLibrary\maindialog.py:156
+#: addon\globalPlugins\bookLibrary\maindialog.py:156
 msgid "A library dialog is already opened; Close it first please."
 msgstr "هناك محاورة لمكتبة أخرى مفتوحة; أغلقها أولاً لو سمحت."
-
-#. Add-on summary, usually the user visible name of the addon.
-#. Translators: Summary for this add-on to be shown on installation and add-on information.
-#: buildVars.py:17
-msgid "My Arabic Library"
-msgstr "مكتبتي العربية"
 
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
@@ -244,15 +245,45 @@ msgid ""
 "you can open the main dialog of libraries with the shortcut: nvda+control"
 "+windows+a\n"
 "And as always you can change this command via: nvda menu> preferences>input "
-"gestures> my arabic library."
+"gestures> book library."
 msgstr ""
-"هذه الإضافة تساعدك على تنظيم كتبك التي بالإمكان تنزيلها من الإنترنت.\n"
-"إختر من المحاورة الأولى نوع الكتب, أو المكتبة التي تريد.\n"
-"و في محاورةْ المكتبة, يمكنك الإطِّلاع على لمحة عن الكتاب, حجمه, رابط الكتاب, و "
-"رابط آخر إذا توفر.\n"
-"فضلاً عن أنك تستطيع بالضغط على مفتاح التطبيقات و أنت على قاءمةْ الكتب, إضافةْ أو "
-"تعديل أو إزالةْ كتاب أو الكل, و كذلك عرض الكتب حسب المؤلف أو عنوان الكتاب\n"
-"تستطيع فتح المحاورة الأساسية للإضافة بالضغط على الإختصار: Nvda+control+windows"
-"+a\n"
-"و كما هو معروف تستطيع داءماً تغيير أو تعديل الإختصار بالذهاب إلى: قاءمةْ Nvda> "
-"تفضيلات> تخصيص إختصارات Nvda> مكتبتي العربية."
+"هذه ئإضافة لتنظيم روابط الكتب التي ترغب بها من على الإنترنت\n"
+"كل ما عليك هو اختيار المكتبة أو تصنيف معين من المحاورة الأولى\n"
+"و من على محاورةْ المكتبة التي ستظهر, يمكنك معرفةْ لمحة عن الكتاب, الحجم, رابط "
+"التحميل و رابط آخر إنْ وجد.\n"
+"و زيادة على ذلك,بالوقوف على قائمةْ الكتب و باستعمال مفتاح التطبيقات, يمكنك "
+"إضافةْ, تعديل, إزالةْ الكتاب المحدد أو الكل, كما بلإمكان تنظيم الكتب حسب اسم "
+"الكتاب أو المؤلف.\n"
+"تستطيع فتح المحاورة الرئيسية للإضافة بالضغط على الإختصار: nvda+control+windows"
+"+a.\n"
+"و تستطيع دائما تغيير هذا الإختصار بالذهاب إلى: قاءمةْ NVDA ثم تفضيلات ثم تخصيص "
+"إختصارات NVDA ثم مكتبةْ الكتب."
+
+#~ msgid "Open My Arabic Library dialog."
+#~ msgstr "فتح محاورةْ مكتبتي العربية."
+
+#~ msgid "My Arabic Library"
+#~ msgstr "مكتبتي العربية"
+
+#~ msgid ""
+#~ "This is an addon to arrange your downloadable books.\n"
+#~ "you choose the library or category of books from first dialog.\n"
+#~ "and on the library dialog you can access the about, size, url, another url "
+#~ "if present of a book.\n"
+#~ "moreover with context menu  on list of books you can add, edit, remove, "
+#~ "remove all, and sort book by author or name.\n"
+#~ "you can open the main dialog of libraries with the shortcut: nvda+control"
+#~ "+windows+a\n"
+#~ "And as always you can change this command via: nvda menu> preferences>input "
+#~ "gestures> my arabic library."
+#~ msgstr ""
+#~ "هذه الإضافة تساعدك على تنظيم كتبك التي بالإمكان تنزيلها من الإنترنت.\n"
+#~ "إختر من المحاورة الأولى نوع الكتب, أو المكتبة التي تريد.\n"
+#~ "و في محاورةْ المكتبة, يمكنك الإطِّلاع على لمحة عن الكتاب, حجمه, رابط الكتاب, و "
+#~ "رابط آخر إذا توفر.\n"
+#~ "فضلاً عن أنك تستطيع بالضغط على مفتاح التطبيقات و أنت على قاءمةْ الكتب, إضافةْ "
+#~ "أو تعديل أو إزالةْ كتاب أو الكل, و كذلك عرض الكتب حسب المؤلف أو عنوان الكتاب\n"
+#~ "تستطيع فتح المحاورة الأساسية للإضافة بالضغط على الإختصار: Nvda+control"
+#~ "+windows+a\n"
+#~ "و كما هو معروف تستطيع داءماً تغيير أو تعديل الإختصار بالذهاب إلى: قاءمةْ Nvda> "
+#~ "تفضيلات> تخصيص إختصارات Nvda> مكتبتي العربية."

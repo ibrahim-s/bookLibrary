@@ -4,6 +4,7 @@
 
 import wx, gui
 import webbrowser
+import sys
 import queueHandler
 from .books import Book
 from logHandler import log
@@ -206,8 +207,12 @@ class MyPopupMenu(wx.Menu):
 				return
 			Book.remove_book(key)
 			sortingFlag= BookDialog.sortByAuthor
+			# index of the book to be selected and focused on
+			index= i if len(BookDialog.book_keys)>= i+2 else i-1
 			self.parent.populateListBox(sortingFlag)
-			self.parent.focusAndSelect()
+			if index >=0:
+				self.parent.focusAndSelect(BookDialog.book_keys[index])
+			else: self.parent.focusAndSelect()
 
 	def onRemoveAll(self, e):
 		if gui.messageBox(
@@ -298,12 +303,14 @@ class BookDialog(wx.Dialog):
 			if not sortByAuthor:
 				BookDialog.book_keys= sorted(_keys)
 				#lst= [key[0]+' by '+key[1] for key in self.book_keys]
-				lst= map(lambda x: x[0]+ u' تأليف '+x[1] if x[1] else x[0], [key for key in self.book_keys])
+				if sys.version_info.major == 2: lst= map(lambda x: x[0]+ u' تأليف '+x[1] if x[1] else x[0], [key for key in self.book_keys])
+				else: lst= list(map(lambda x: x[0]+ u' تأليف '+x[1] if x[1] else x[0], [key for key in self.book_keys]))
 			else:
 				temp= sorted([(j, i) for i, j in _keys])
 				BookDialog.book_keys= [(name, author) for author, name in temp]
-				#lst= [author+'; '+name for author, name in temp]
-				lst= map(lambda (x,y): x+u' في '+y if x else y, temp)
+				#if sys.version_info.major == 2: lst= map(lambda x: x[0]+u' في '+x[1] if x[0] else x[1], temp)
+				#else: lst= list(map(lambda x: x[0]+u' في '+x[1] if x[0] else x[1], temp))
+				lst= [x+u' في '+y if x else y for x,y in temp]
 			self.listBox.Set(lst)
 		self.numberOfBooks= len(self.book_keys)
 		self.SetTitle(u"{}({})".format(self.filename, self.numberOfBooks))

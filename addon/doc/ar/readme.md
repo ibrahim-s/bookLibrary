@@ -3,7 +3,7 @@
 تصميم: ابراهيم حمادة  
 التوافق مع إصدارات NVDA: 2018.3.0 to 2019.3.0  
 التوافق مع بايثون3: نعم  
-Download [version 2.1](https://github.com/ibrahim-s/myLibrary/releases/download/v2.1-dev/myArabicLibrary-2.1-dev.nvda-addon)  
+Download [version 2.2](https://github.com/ibrahim-s/myLibrary/releases/download/v2.2-dev/bookLibrary-2.2-dev.nvda-addon)  
 
 هذه الإضافة تساعد على تنظيم و ترتيب الكتب التي يتم تنزيلها من الإنترنت.  
 من المحاورة الرءيسية يمكنك إختيار المكتبة التي تريد, و إضغط عليها إنتر.  

@@ -5,6 +5,7 @@ import addonHandler
 import os
 import shutil
 import globalVars
+from logHandler import log
 
 def onInstall():
 	userPath= os.path.expanduser('~')

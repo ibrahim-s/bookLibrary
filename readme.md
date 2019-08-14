@@ -3,7 +3,7 @@
 Author: Ibrahim Hamadeh  
 NVDA compatibility: 2018.3.0 to 2019.3.0  
 Python3 compatibility: Yes  
-Download [Development version 2.1](https://github.com/ibrahim-s/myLibrary/releases/download/v2.1-dev/myArabicLibrary-2.1-dev.nvda-addon)  
+Download [Development version 2.2](https://github.com/ibrahim-s/myLibrary/releases/download/v2.2-dev/bookLibrary-2.2-dev.nvda-addon)  
 
 This addon helps the user to arrange his downloadable books in library like way.  
 From the main dialog of libraries, you can choose the library you like and press enter on it.  

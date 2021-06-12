@@ -1,9 +1,9 @@
 # Book Library #
 
 Author: Ibrahim Hamadeh  
-NVDA compatibility: 2018.3.0 to 2019.3.0  
+NVDA compatibility: 2018.3.0 and later  
 Python3 compatibility: Yes  
-Download [Development version 2.2](https://github.com/ibrahim-s/myLibrary/releases/download/v2.2-dev/bookLibrary-2.2-dev.nvda-addon)  
+Download [version 2.2][1]  
 
 This addon helps the user to arrange his downloadable books in library like way.  
 From the main dialog of libraries, you can choose the library you like and press enter on it.  
@@ -28,6 +28,11 @@ NVDA menu>preferences>inputGestures>Book Library.
 *	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
 *	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
 
+### Changes for version 2.2 ###
+
+*	Update latest tested version to 2021.1  
+*	Fix a bug in activating context menu, existed in NVDA 2021.1  
+
 ### Changes for version 2.1 ###
 
 *	Added compatibility with python3  
@@ -50,3 +55,5 @@ Doing that, so that all instances of the book library addon in the installed or 
 ### contact me ###
 
 In the case of any bugs or suggestion you can [send me an email.](mailto:ibra.hamadeh@hotmail.com)
+
+[1]: https://github.com/ibrahim-s/myLibrary/releases/download/v2.2/bookLibrary-2.2.nvda-addon

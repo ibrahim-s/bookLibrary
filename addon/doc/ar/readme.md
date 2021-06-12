@@ -1,9 +1,9 @@
 # مكتبةْ الكتب #
 
 تصميم: ابراهيم حمادة  
-التوافق مع إصدارات NVDA: 2018.3.0 to 2019.3.0  
+التوافق مع إصدارات NVDA: 2018.3 فما فوق  
 التوافق مع بايثون3: نعم  
-Download [version 2.2](https://github.com/ibrahim-s/myLibrary/releases/download/v2.2-dev/bookLibrary-2.2-dev.nvda-addon)  
+Download [version 2.2][1]  
 
 هذه الإضافة تساعد على تنظيم و ترتيب الكتب التي يتم تنزيلها من الإنترنت.  
 من المحاورة الرءيسية يمكنك إختيار المكتبة التي تريد, و إضغط عليها إنتر.  
@@ -28,6 +28,11 @@ Download [version 2.2](https://github.com/ibrahim-s/myLibrary/releases/download/
 *	ستفتح محاورة لاختيار المجلد الذي تريد تصدير المكتبة إليه, إختر المجلد الذي تريد و اضغطْ إنتر, أو تحرك بالتاب إلى زر "Select folder" و اضغطْ عليه إنتر.  
 *	تمام , لقد تم الأمر, ستسمع رسالة تقول أنه قد تم تصدير المكتبة, و مبروك عليك.  
 
+### التغييرات في إصدار 2.2 ###
+
+*	تعديل آخِر نُسخة تَمَّ تجريبها, لتتوافق مع 2021.1 فما فوق  
+*	إعادةْ تشغيل مفتاح التطبيقات, بعدما تَعطل مع إصدار NVDA2021.1  
+
 ### التغييرات في إصدار 2.1 ###
 *	جعل الإضافة متوافقة مع بايثون3  
  
@@ -49,3 +54,5 @@ Download [version 2.2](https://github.com/ibrahim-s/myLibrary/releases/download/
 ### التواصل نع المطور ###
 
 في حال وجود اقتراحات أو عيوب في الإضافة بالإمكان [مراسلتي.](mailto:ibra.hamadeh@hotmail.com)
+
+[1]: https://github.com/ibrahim-s/myLibrary/releases/download/v2.2/bookLibrary-2.2.nvda-addon

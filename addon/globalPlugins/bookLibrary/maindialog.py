@@ -112,7 +112,9 @@ class ChooseLibrary(wx.Dialog):
 		listBoxSizer= wx.BoxSizer(wx.VERTICAL)
 		staticText= wx.StaticText(panel, -1, u'إختر مكتبة لو سمحت')
 		self.listBox = wx.ListBox(panel,-1, style= wx.LB_SINGLE)
-		self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
+		#self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
+		#wx.EVT_CONTEXT_MENU is used in NVDA 2021.1,for wx.EVT_RIGHT_DOWN seized to work.
+		self.listBox.Bind(wx.EVT_CONTEXT_MENU, self.OnRightDown)
 		listBoxSizer.Add(staticText, 0, wx.ALL, 5)
 		listBoxSizer.Add(self.listBox, 1, wx.ALL|wx.EXPAND, 5)
 		mainSizer.Add(listBoxSizer, 1, wx.ALL, 5)
@@ -143,7 +145,9 @@ class ChooseLibrary(wx.Dialog):
 		#log.info('under right down handler') 
 		obj= e.GetEventObject()
 		id= obj.GetId()
-		self.PopupMenu(LibraryPopupMenu(self, id), e.GetPosition())
+		menu= LibraryPopupMenu(self, id)
+		self.PopupMenu(menu, e.GetPosition())
+		menu.Destroy()
 
 	def onOk(self, evt):
 		i= self.listBox.GetSelection()

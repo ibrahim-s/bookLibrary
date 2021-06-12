@@ -278,7 +278,9 @@ class BookDialog(wx.Dialog):
 		panel.SetSizer(sizer)
 
 		#make bindings
-		self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
+		#self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
+		#wx.EVT_CONTEXT_MENU is used in NVDA 2021.1,for wx.EVT_RIGHT_DOWN seized to work.
+		self.listBox.Bind(wx.EVT_CONTEXT_MENU, self.OnRightDown)
 		self.listBox.Bind(wx.EVT_KILL_FOCUS, self.onKillFocus)
 		self.urlText.Bind(wx.EVT_TEXT_ENTER, self.onDownload)
 		self.anotherUrlText.Bind(wx.EVT_TEXT_ENTER, self.onAnotherUrl)
@@ -330,10 +332,11 @@ class BookDialog(wx.Dialog):
 			self.Show()
 
 	def OnRightDown(self, e):
-#		print 'hi'
 		obj= e.GetEventObject()
 		id= obj.GetId()
-		self.PopupMenu(MyPopupMenu(self, id), e.GetPosition())
+		menu= MyPopupMenu(self, id)
+		self.PopupMenu(menu, e.GetPosition())
+		menu.Destroy()
 
 	def onKillFocus(self, evt):
 		#log.info('under kill focus event')

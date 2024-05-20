@@ -1,14 +1,14 @@
 # Book Library #
 
 Author: Ibrahim Hamadeh  
-NVDA compatibility: 2018.3.0 and later  
-Python3 compatibility: Yes  
-Download [version 2.2][1]  
+NVDA compatibility: 2019.3 and later  
+Download [version 2.2.1][1]  
 
-This addon helps the user to arrange his downloadable books in library like way.  
+This addon helps the user to arrange his downloadable or online books in library like way.  
 From the main dialog of libraries, you can choose the library you like and press enter on it.  
-On the library dialog, you can read informations about the books, size of file, the link, and the another link if present.  
-You can open Book Library dialog pressing on the command: NVDA+control+windows+a  
+You can in this dialog, add, Rename or remove any libraries at any time.  
+On the library dialog, you can read informations about the books, size of file, the link, and other links if present.  
+You can open Book Library dialog pressing on the command: NVDA+control+windows+b  
 You can as always change this gesture or command going to :  
 NVDA menu>preferences>inputGestures>Book Library.  
 
@@ -16,17 +16,26 @@ NVDA menu>preferences>inputGestures>Book Library.
 
 *	First open the main dialog pressing on the default or assigned gesture to the addon.  
 *	You will be standing on the list of libraries, choose one, and press enter.  
-*	A dialog for that library will open, showing all books(title by author) in it in a list .  
-*	Tabing on that dialog you can access the about of the book, size, download link, and another link if found.  
+*	If the list is empty, tab and add a library, and Tabing again you can Rename a library or remove it.  
+*	Pressing enter on it, a dialog for that library will open, showing all books(title by author) in it in a list .  
+*	Tabing on that dialog you can access the about of the book, size, download link, and other links for the book if found.  
 *	Stand on the book you want in this dialog, and press the context menu.  
 *	From there you can add, edit, remove a book or all.  
-*	Moreover from there you can sort the books, by either title or author.  
-*	If you want to download a book with the default or first link, just stand on it and press ente.  
-*	If you want to download it with the second or another link, tab to that another link and press enter on it.  
-*	Lastly do you want to export any library as html file, Yes you can  
-*	Stand on the library you want to export and press the contact menu, arrow down once to Export library as html and press enter.  
+*	Moreover, from there you can move book to another library, and sort books, by either title or author.  
+*	If you want to access a book with the default or first link, just stand on it and press ente.  
+*	If you want to access it with one of the other links, tab to the other links window, stand on the link, and press enter on it.  
+*	Lastly do you want to export any library as html or json file, Yes you can  
+*	Stand on the library you want to export and press the contact menu, arrow down once to Export library as, choose html or json, and press enter.  
 *	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
 *	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
+
+### Changes for version 2.2.1 ###
+
+*	Now from the main dialog, you can add, Rename or remove any library.
+*	Type of data files has been changed from pickle to json.
+*	Now url2 control has been fchanged to multi edit control for other links related to the book. 
+*	Minumum tested versionis change to 2019.3, dropping support for python2.
+*	Last tested version has been updated, making the addon compatible with NVDA 2024.1.
 
 ### Changes for version 2.2 ###
 
@@ -56,4 +65,4 @@ Doing that, so that all instances of the book library addon in the installed or 
 
 In the case of any bugs or suggestion you can [send me an email.](mailto:ibra.hamadeh@hotmail.com)
 
-[1]: https://github.com/ibrahim-s/myLibrary/releases/download/v2.2/bookLibrary-2.2.nvda-addon
+[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.1/bookLibrary-2.2.1.nvda-addon

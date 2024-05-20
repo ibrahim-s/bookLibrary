@@ -23,24 +23,25 @@ addon_info = {
 	"addon_summary" : _("Book Library"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
-	"addon_description" : _("""This is an addon to arrange your downloadable books.
-you choose the library or category of books from first dialog.
-and on the library dialog you can access the about, size, url, another url if present of a book.
+	"addon_description" : _("""This is an addon to arrange your downloadable or online books.
+from the main dialog, you choose the library or category of books.
+You can add, rename or remove any library in this dialog at any time.
+and on the library dialog you can access the about, size, url, other urls if present of a book.
 moreover with context menu  on list of books you can add, edit, remove, remove all, and sort book by author or name.
-you can open the main dialog of libraries with the shortcut: nvda+control+windows+a
+you can open the main dialog of libraries with the shortcut: nvda+control+windows+b
 And as always you can change this command via: nvda menu> preferences>input gestures> book library."""),
 	# version
-	"addon_version" : "2.2",
+	"addon_version" : "2.2.1",
 	# Author(s)
 	"addon_author" : "ibrahim hamadeh <ibra.hamadeh@hotmail.com>",
 	# URL for the add-on documentation support
-	"addon_url" : "https://github.com/ibrahim-s/myLibrary.git",
+	"addon_url" : "https://github.com/ibrahim-s/bookLibrary",
 	# Documentation file name
 	"addon_docFileName" : "readme.html",
 	# Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)
-	"addon_minimumNVDAVersion" : "2018.3.0",
+	"addon_minimumNVDAVersion" : "2019.3.0",
 	# Last NVDA version supported/tested (e.g. "2018.4.0", ideally more recent than minimum version)
-	"addon_lastTestedNVDAVersion" : "2021.1.0",
+	"addon_lastTestedNVDAVersion" : "2024.1.0",
 	# Add-on update channel (default is None, denoting stable releases,
 	# and for development releases, use "dev".)
 	# Do not change unless you know what you are doing!

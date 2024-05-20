@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # bookLibrary
-# Copyright 2019 ibrahim hamadeh, released under GPLv2.0
+# Copyright (C) 2019 ibrahim hamadeh, released under GPLv2.0
 # An addon that helps collect and arrange and access easily informations related to a book
-# about the book, size of book file, url, and have the ability to download the book file from the addon.
+# about the book, size of book file, url, and have the ability to download or access the book from the addon.
 
 from globalPluginHandler import GlobalPlugin
 import wx, gui
 import addonHandler
 addonHandler.initTranslation()
 
-from .maindialog import ChooseLibrary
+from .maindialog import LibraryDialog, LIBRARIES_DIR
 MAINDIALOG= None
 
 class GlobalPlugin(GlobalPlugin):
@@ -20,7 +20,7 @@ class GlobalPlugin(GlobalPlugin):
 	def script_openMyLibrary(self, gesture):
 		global MAINDIALOG
 		if not MAINDIALOG:
-			MAINDIALOG= ChooseLibrary(gui.mainFrame)
+			MAINDIALOG= LibraryDialog(gui.mainFrame, LIBRARIES_DIR)
 		else:
 			MAINDIALOG.Raise()
 
@@ -28,5 +28,5 @@ class GlobalPlugin(GlobalPlugin):
 	script_openMyLibrary.__doc__ = _('Open Book Library dialog.')
 
 	__gestures = {
-		'KB:NVDA+control+windows+a':'openMyLibrary'
+		'KB:NVDA+control+windows+b':'openMyLibrary'
 	}

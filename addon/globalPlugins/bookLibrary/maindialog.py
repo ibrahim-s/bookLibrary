@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
-# maindialog.py
-#graphical user interface for the list of libraries.
+# libraryDialog.py
+# Copyright (C) 2019 ibrahim hamadeh, released under GPLv2.0
+# See the file COPYING for more details.
+# graphical user interface for libraries dialog
 
-#for compatibility with python3
-try:
-	import cPickle as pickle
-except ImportError:
-	import pickle
-
-import wx, gui, ui
-import core
-import os, sys
-import codecs
+import wx, gui, core, os, sys, ui
+import api, shutil, codecs, config, globalVars
+import json
+import re
 from logHandler import log
 from .books import Book
 from .bookdialog import BookDialog
@@ -20,71 +16,158 @@ import addonHandler
 addonHandler.initTranslation()
 
 CURRENT_DIR= os.path.dirname(os.path.abspath(__file__))
-LIBRARIES_DIR= os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')).decode("mbcs") if sys.version_info.major == 2 else os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles'))
+LIBRARIES_DIR= os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles'))
+
+def addLibrary(message, caption, oldName=None):
+	''' Entering the name of new library, or renaming existing one by passing a value to oldName in this function.'''
+	if oldName:
+		name=wx.GetTextFromUser(message, caption, oldName).strip()
+	else:
+		name= wx.GetTextFromUser(message, caption).strip()
+	if name in LibraryDialog.libraryFiles:
+		gui.messageBox(
+		# Translators: message displayed when the name is present for another library.
+		_('This name is already present for another library, enter another name please'), 
+		# Translators: Title of messagebox.
+		_('Warning'))
+		return addLibrary(message, caption, oldName)
+	return name
 
 def makeHtmlFile(libraryName, libraryData, newpath):
-	''' Make Html file out of pickle library file.'''
+	''' Make Html file out of json library file.'''
 	with codecs.open(newpath, 'wb', encoding= 'utf-8') as html:
 		html.write(u"""<!DOCTYPE html><html lang="en"><head>
 			<meta charset="UTF-8">
 <title>{} </title>
 		</head><body>
-		<h1>{}</h1>
-		<ol>""".format(u'مكتبتي', libraryName)
+		<h1>{} {}</h1>
+		<ol>""".format(_('Audio Library'), _("Library: "), libraryName)
 		)
-		for name, author, about, size, url, url2 in libraryData:
-			html.write(u'<li><h2>{} {}</h2>'.format(name, u' تأليف '+author if author else author))
-			html.write(u'<p>Download Url:</p>')
+		for name, author, about, size, url, otherUrls in libraryData:
+			html.write(u'<li><h2>{name} {by} {author}</h2>'.format(name= name, by= _(" by ") if author else "", author= author))
+			html.write(u'<p>{}</p>'.format(_("Access the book:")))
 			html.write(u'<p><a href= "{}">{}</a></p>'.format('http://'+url if url.startswith('www.') else url, name))
-			if url2:
-				html.write(u'<p><a href= "{}">Another Link</a></p>'.format('http://'+url2 if url2.startswith('www.') else url2))
+			if otherUrls:
+				html.write(u'''<div><p>{}</p>
+				<p><pre>{}</pre></p>
+				</div>'''.format(_("Other links for the book:"), otherUrls))
 			if size:
 				html.write(u'<p>Size: {}</p>'.format(size))
 			if about:
-				html.write(u"<h3>{}</h3><p>{}</p>".format(u'عن الكتاب', about))
+				html.write(u"<h3>{}</h3><p>{}</p>".format(_("About the book:"), about))
 			html.write(u'</li>')
 		html.write(u'</ol></body></html>')
 		return True
 
+def validateLibraryFile(filePath):
+	''' checking if the library file to be imported is valid. if it is not it returns False'''
+	try:
+		with open(filePath, encoding= 'utf-8') as f:
+			d= json.load(f)
+	except Exception as e:
+		return False
+	else:
+		#log.info(d)
+		#the file has opened but we want to verify it's content
+		#if empty dictionary, that is empty json file we accept it.
+		if d== {}:
+			return True
+		if d and isinstance(d, dict):
+			try:
+				[(key, d[key]['about'], d[key]['size'], d[key]['url'], d[key]['otherUrls']) for key in d]
+			except Exception as e:
+				log.info('Error in verifying json file', exc_info=True)
+				return False
+			else:
+				return True
+		return False
+
+ #Popup menu class
 class LibraryPopupMenu(wx.Menu):
-	''' The menu that pops up upon right clicking on the list box or list of libraries.'''
-	def __init__(self, parent, objectId):
+	''' The menu that pops up upon right clicking on the list box.'''
+	def __init__(self, parent, libraries_directory, objectId):
 		super(LibraryPopupMenu, self).__init__()
         
 		self.parent = parent
+		self.LIBRARIES_DIR= libraries_directory
 		self.objectId= objectId
 
-		#Add export Library as html menu.
-		exportHtml= wx.MenuItem(self, wx.ID_ANY, 
-		# Translators: label obj menu items to export a library as html.
-		_('Export Library as html'))
-		self.Append(exportHtml)
-		self.Bind(wx.EVT_MENU, self.onExportHtml, exportHtml)
+#add a subMenu for exporting a library
+		subMenu= wx.Menu()
+		self.exportJson = subMenu.Append(wx.ID_ANY, 
+		# Translators: label of menu to export library as json file
+		_('Json File'))
+		self.exportHtml = subMenu.Append(wx.ID_ANY, 
+		# Translators: label of menu to export library as html.
+		_('Html File'))
+		self.AppendSubMenu(subMenu, 
+		# Translators: label obj subMenu items for exporting a library.
+		_('Export Library As'))
+		self.Bind(wx.EVT_MENU, self.onExportJson, self.exportJson)
+		self.Bind(wx.EVT_MENU, self.onExportHtml, self.exportHtml)
+
+		#Add Import Library menu
+		importLibrary= wx.MenuItem(self, wx.ID_ANY, 
+		# Translators: label obj menu items to import a library.
+		_('Import Library(as Json)'))
+		self.Append(importLibrary)
+		self.Bind(wx.EVT_MENU, self.onImport, importLibrary)
+
+	def onExportJson(self, evt):
+		dlg = wx.DirDialog(self.parent, "Choose a directory:",
+		style=wx.DD_DEFAULT_STYLE
+| wx.DD_DIR_MUST_EXIST
+		)
+		if dlg.ShowModal() != wx.ID_OK:
+			dlg.Destroy()
+			return
+		path_chosen= dlg.GetPath()
+		#log.info(path_chosen)
+
+		if path_chosen:
+			library_name= self.parent.FindWindowById(self.objectId).GetStringSelection()
+			try:
+				shutil.copy(os.path.join(self.LIBRARIES_DIR, library_name+'.json'), path_chosen)
+			except Exception as e:
+				wx.CallAfter(gui.messageBox,
+				# Translators: message of error dialog displayed when cannot export library file.
+				_("Failed to export library"),
+				# Translators: title of error dialog .
+				_("Error"),
+				wx.OK|wx.ICON_ERROR)
+				raise e
+			else:
+				core.callLater(10, ui.message,
+				# Translators: Message presented when library has been exported.
+				_("Information: Library Exported"))
+		dlg.Destroy()
 
 	def onExportHtml(self, evt):
 		library_name= self.parent.FindWindowById(self.objectId).GetStringSelection()
-		path= os.path.join(LIBRARIES_DIR, library_name+'.pickle')
+		path= os.path.join(self.LIBRARIES_DIR, library_name+'.json')
 		try:
-			with open(path, 'rb') as f:
-				d= pickle.load(f)
-		except EOFError:
+			with open(path, 'r') as f:
+				d= json.load(f)
+		except Exception as e:
 			gui.messageBox(
-			_('Failed to open library, or may be library selected is empty.'),
-			# Translators:title of message dialog
+			_('Failed to open library, or may be library file is not valid.'),
 			_('Error'), wx.OK|wx.ICON_ERROR)
+			log.info('Failed to open library', exc_info= True)
 			return
 		else:
-			#the library data as list of tuple of six items  (name, author, about, size, url, url2), which are the attributes of a book.
-			library_data= sorted([(key[0], key[1], d[key]['about'], d[key]['size'], d[key]['url'], d[key]['url2']) for key in d])#, key= lambda x: x[1])
+			# Opening the library file succeeded
+			#the library data as list of tuple of six items  (name, author, about, size, url, otherUrls), which are the attributes of a book.
+			library_data= sorted([(eval(key)[0], eval(key)[1], d[key]['about'], d[key]['size'], d[key]['url'], d[key]['otherUrls']) for key in d])#, key= lambda x: x[1])
 
 		dlg = wx.DirDialog(self.parent, "Choose a directory:",
 		style=wx.DD_DEFAULT_STYLE
 | wx.DD_DIR_MUST_EXIST
 		)
-		if dlg.ShowModal() == wx.ID_OK:
-			path_chosen= dlg.GetPath()
-			#log.info(path_chosen)
-		dlg.Destroy()
+		if dlg.ShowModal() != wx.ID_OK:
+			dlg.Destroy()
+			return
+		path_chosen= dlg.GetPath()
+		#log.info(path_chosen)
 		if path_chosen:
 			html_path= os.path.join(path_chosen, library_name+ '.html')
 			try:
@@ -101,43 +184,175 @@ class LibraryPopupMenu(wx.Menu):
 				core.callLater(200, ui.message,
 				# Translators: Message presented when library has been exported.
 				_("Information: Library Exported"))
-				
+		dlg.Destroy()
 
-class ChooseLibrary(wx.Dialog):
-	def __init__(self, parent):
-		super(ChooseLibrary, self).__init__(parent, title= _('Book Library'))
+	def onImport(self, evt):
+		''' Importing a new json library file to the link library file directory'''
+		dlg= wx.FileDialog(self.parent, "Choose File", "", "", 
+		"Json Files (*.json)|*.json", 
+		wx.FD_FILE_MUST_EXIST)
+
+		if dlg.ShowModal()!= wx.ID_OK:
+			dlg.Destroy()
+			return
+		file_path= dlg.GetPath()
+		dlg.Destroy()
+		#log.info(file_path)
+		if file_path:
+			if not validateLibraryFile(file_path):
+			#validation of the json file did not succeed
+			# Translators: Message to be displayed when import fails due to validation problem
+				gui.messageBox(_('Importfailed; chosen file seems not valid.'),
+				# Translators: Title of message box
+				_('Import Error'), wx.OK|wx.ICON_ERROR)
+				return
+			file_name= os.path.split(file_path)[1]
+			if file_name in os.listdir(self.LIBRARIES_DIR):
+				file_name= self.importingLibraryWithNamePresent(file_name, file_path)
+			library_name= os.path.splitext(file_name)[0]
+			try:
+				shutil.move(file_path, os.path.join(self.LIBRARIES_DIR, file_name))
+			except Exception as e:
+			# Translators: Message displayed when importing failed after validation succeeded
+				gui.messageBox(_('Sorry, importing of library failed'),
+				# Translators: Title of message box
+				_('Error', wx.OK|wx.ICON_ERROR))
+				raise e
+			else:
+				if library_name not in LibraryDialog.libraryFiles:
+					# this checking is important in case obj merging 2 libraries, if we do not do it we will have 2 files with same name in libraries list.
+					LibraryDialog.libraryFiles.append(library_name)
+				LibraryDialog.libraryFiles.sort()
+				self.parent.refreshLibraries(str= library_name)
+				core.callLater(200, ui.message,
+				# Translators: Message presented when library has been imported.
+				_("Information: Library imported."))
+
+	def importingLibraryWithNamePresent(self, filename, filepath):
+		'''Importing a library, that has a name already present in existing libraries'''
+		library_name= os.path.splitext(filename)[0]
+		# Translators: Ask the user if he wants to merge the two libraries or not.
+		if gui.messageBox(_("A library with similar name already exists, do you want to merge the two libraries?"),
+			# Translators: Title of message box
+			_("Information"),
+			style= wx.YES_NO|wx.ICON_QUESTION)== wx.NO:
+			libraryNames= [os.path.splitext(f)[0] for f in os.listdir(self.LIBRARIES_DIR) if f.startswith(library_name)]
+			if len(libraryNames)== 1:
+				return library_name + ' (2).json'
+			nums= []
+			# library names that end with a number between paranthesis
+			libraryNames= [name for name in libraryNames if re.match(r'.+\([0-9]+\)', name)]
+			try:
+				for name in libraryNames:
+					# n is the number to be between paranthesis
+					n=name[name.rfind('(')+1: -1]
+					nums.append(int(n))
+				raisedNum= max(nums)+ 1
+			except:
+				raisedNum=2
+			return library_name+ " (%s).json"% raisedNum
+		else:
+			# Now if the user wants to merge the two libraries.
+			#log.info('mergeing two libraries ...')
+			with open(filepath, encoding= 'utf-8') as f:
+				importedDict= json.load(f)
+			with open(os.path.join(self.LIBRARIES_DIR, filename), encoding= 'utf-8') as f:
+				existedDict= json.load(f)
+			importedDict.update(existedDict)
+			mergedDict= importedDict
+			with open(filepath, 'w', encoding= 'utf-8') as f:
+				json.dump(mergedDict, f, ensure_ascii= False, indent= 4)
+			return filename
+
+class LibraryDialog(wx.Dialog):
+	def __init__(self, parent, path):
+		#pathLabel= config.conf["linkLibrary"]["chosenDataPath"]
+		# pathLabel is the label chosen by the user, for the directory that stores the data files
+		# let us take only the basename of the path, after request from users
+		#pathLabel= os.path.basename(pathLabel) if pathLabel.lower().startswith('c:') else pathLabel
+		# Translators: Title of dialog with the path label as suffix.
+		#title= _("Link Library - {}").format(pathLabel)
+		title= _("Book Library")
+		super(LibraryDialog, self).__init__(parent, title= title)
+		#self.LIBRARIES_DIR= os.path.join(path, 'linkLibrary-addonFiles')
+		self.createDirectoryIfNotExist()
 
 		panel= wx.Panel(self)
 		mainSizer=wx.BoxSizer(wx.HORIZONTAL)
 		listBoxSizer= wx.BoxSizer(wx.VERTICAL)
-		staticText= wx.StaticText(panel, -1, u'إختر مكتبة لو سمحت')
+		# Translators: label of libraries list box.
+		staticText= wx.StaticText(panel, -1, _('Choose a library'))
 		self.listBox = wx.ListBox(panel,-1, style= wx.LB_SINGLE)
 		#self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
-		#wx.EVT_CONTEXT_MENU is used in NVDA 2021.1,for wx.EVT_RIGHT_DOWN seized to work.
 		self.listBox.Bind(wx.EVT_CONTEXT_MENU, self.OnRightDown)
+		# wx.EVT_CONTEXT_MENU is used in NVDA 2021.1, for wx.EVT_RIGHT_DOWN seized to work.
+		self.listBox.Bind(wx.EVT_KILL_FOCUS, self.onKillFocus)
 		listBoxSizer.Add(staticText, 0, wx.ALL, 5)
 		listBoxSizer.Add(self.listBox, 1, wx.ALL|wx.EXPAND, 5)
 		mainSizer.Add(listBoxSizer, 1, wx.ALL, 5)
 
 		buttonSizer= wx.BoxSizer(wx.VERTICAL)
-		self.ok= wx.Button(panel, wx.ID_OK, _('OK'))
+		# Add library button
+		self.add= wx.Button(panel, wx.ID_ANY,
+		# Translators: Label of Add button
+		_("Add"))
+		self.add.Bind(wx.EVT_BUTTON, self.onAdd)
+		buttonSizer.Add(self.add, 1,wx.ALL, 10)
+		# Rename button
+		self.rename= wx.Button(panel, wx.ID_ANY,
+		# Translators: Label of Rename button
+		_("Rename"))
+		self.rename.Bind(wx.EVT_BUTTON, self.onRename)
+		buttonSizer.Add(self.rename, 1,wx.ALL, 10)
+		# Remove button
+		self.remove= wx.Button(panel, wx.ID_ANY,
+		# Translators: Label of Remove button
+		_("Remove"))
+		self.remove.Bind(wx.EVT_BUTTON, self.onRemove)
+		buttonSizer.Add(self.remove, 1,wx.ALL, 10)
+		self.ok= wx.Button(panel, wx.ID_OK,
+		# Translators: Label of OK button
+		_('OK'))
 		self.ok.SetDefault()
 		self.ok.Bind(wx.EVT_BUTTON, self.onOk)
 		buttonSizer.Add(self.ok, 1,wx.ALL, 10)
-		self.cancel = wx.Button(panel, wx.ID_CANCEL, _('cancel'))
+		self.cancel= wx.Button(panel, wx.ID_CANCEL,
+		# Translators: Label of Cancel button
+		_("Cancel"))
 		self.cancel.Bind(wx.EVT_BUTTON, self.onCancel)
 		buttonSizer.Add(self.cancel, 0, wx.EXPAND|wx.ALL, 10)
 		mainSizer.Add(buttonSizer, 0, wx.EXPAND|wx.ALL, 5)
 		panel.SetSizer(mainSizer)
 		self.postInit()
 
+	def createDirectoryIfNotExist(self):
+		path= LIBRARIES_DIR
+		#path is the full path, with the base folder of the directory.
+		if os.path.isdir(path):
+			return
+		try:
+			os.mkdir(path)
+			#create one file in the directory named general.json
+			with open(os.path.join(path, "general.json"), 'w') as f:
+				f.write("{}")
+		except:
+			log.info("Failed to create directory", exc_info=1)
+			core.callLater(100, ui.message,
+			# Translators: Message displayed when failing to create new directory for data files
+			_("Information:Failed to create directory."))
+			return
+
 	def postInit(self):
-		#foundFiles= os.listdir(os.path.join(CURRENT_DIR,'..', '..', 'mydata'))
-		foundFiles= os.listdir(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles'))
-		libraryFiles= sorted([os.path.splitext(f)[0].decode("mbcs") for f in foundFiles]) if sys.version_info.major == 2 else sorted([os.path.splitext(f)[0] for f in foundFiles])
-		self.libraryFiles= libraryFiles
+		#log.info('under postInit of libraries file dialog...')
+		foundFiles= [os.path.splitext(f) for f in os.listdir(LIBRARIES_DIR)]
+		# foundFiles is a list of tuples, first element of the tuple is the name of file and the second is it's extension
+		libraryFiles= sorted([name for name, ext in foundFiles if ext== '.json'], key= lambda s: s.lower())
+		# We picked only .json files, even if there are other files in the folder.
+		LibraryDialog.libraryFiles= libraryFiles
 		self.listBox.Set(libraryFiles)
-		self.listBox.SetSelection(0)
+		#log.info(f'list count:{self.listBox.GetCount()}')
+		if self.listBox.GetCount()> 0:
+			self.listBox.SetSelection(0)
 		self.Raise()
 		self.Show()
 
@@ -145,16 +360,99 @@ class ChooseLibrary(wx.Dialog):
 		#log.info('under right down handler') 
 		obj= e.GetEventObject()
 		id= obj.GetId()
-		menu= LibraryPopupMenu(self, id)
+		menu= LibraryPopupMenu(self, LIBRARIES_DIR, id)
 		self.PopupMenu(menu, e.GetPosition())
 		menu.Destroy()
+		#log.info('destroying pop up menu')
+
+	def onAdd(self, evt):
+		# Translators: Message displayed when adding a new library.
+		message= _('Enter library name please')
+		# Translators: Title of dialog.
+		caption= _('Add Library')
+		name=addLibrary(message, caption)
+		#log.info(name)
+		if not name:
+			return
+		filename= api.filterFileName(name)+'.json'
+		filepath= os.path.join(LIBRARIES_DIR, filename)
+		#log.info('filepath to add: %s'%filepath)
+		try:
+			with open(filepath, 'w') as f:
+				f.write("{}")
+		except Exception as e:
+			raise e
+		LibraryDialog.libraryFiles.append(name)
+		LibraryDialog.libraryFiles.sort(key= str.lower)
+		self.refreshLibraries(str= name)
+		# name is the item to be selected after refresh
+
+	def onRename(self, evt):
+		# Translators: Message displayed when renaming a library
+		message= _('Enter new name please')
+		# Translators: Title of dialog to enter new name.
+		caption= _('rename')
+		oldName= self.listBox.GetStringSelection()
+		i= LibraryDialog.libraryFiles.index(oldName)
+		LibraryDialog.libraryFiles.remove(oldName)
+		newname= addLibrary(message, caption, oldName)
+		#log.info('newname: %s'%newname)
+		if not newname or newname== oldName:
+			LibraryDialog.libraryFiles.insert(i, oldName)
+			return
+		else:
+			newname= api.filterFileName(newname)
+			os.rename(os.path.join(LIBRARIES_DIR, oldName+'.json'), os.path.join(LIBRARIES_DIR, newname+'.json'))
+			#log.info(LibraryDialog.libraryFiles)
+			LibraryDialog.libraryFiles.append(newname)
+			LibraryDialog.libraryFiles.sort(key= str.lower)
+			self.refreshLibraries(str= newname)
+
+	def onRemove(self, evt):
+		toRemove= self.listBox.GetStringSelection()
+		i= self.listBox.GetSelection()
+		# number of items or libraries in the list.
+		numItems= self.listBox.GetCount()
+		if gui.messageBox(
+		# Translators: Message displayed upon removing a library.
+		_('Are you sure you want to remove {} library, this can not be undone?').format(toRemove),
+		# Translators: Title of dialog.
+		_('Warning'), wx.ICON_QUESTION | wx.YES_NO)== wx.NO:
+			return
+		os.remove(os.path.join(LIBRARIES_DIR, toRemove+'.json'))
+		LibraryDialog.libraryFiles.remove(toRemove)
+		sel= i if i!= numItems-1 else i-1
+		#log.info(f'sel after onRemove: {sel}')
+		self.refreshLibraries(i= sel)
+		# i is the index of item to be selected after refresh
+
+	def refreshLibraries(self, str=None, i= None):
+		'''
+		@str: name of selected library
+		@i: index of selected library
+		'''
+		self.Hide()
+		self.listBox.Set(LibraryDialog.libraryFiles)
+		if str:
+			self.listBox.SetStringSelection(str)
+		if i  is not None and i> -1:
+			self.listBox.SetSelection(i)
+		self.listBox.SetFocus()
+		self.Show()
+
+	def onKillFocus(self, evt):
+		library_num= self.listBox.GetCount()
+		state= bool(library_num)
+		self.rename.Enabled= state
+		self.remove.Enabled= state
+		evt.Skip()
 
 	def onOk(self, evt):
+		#log.info('under ok button')
 		i= self.listBox.GetSelection()
 		if i != -1:
 			filename= self.libraryFiles[i]
-			#dlg= BookDialog(gui.mainFrame, filename)
-			if  BookDialog.BOOKDIALOG:
+			if  BookDialog.currentInstance:
 				gui.messageBox(
 				# Translators: Message be displayed when a library dialog is already opened.
 			_('A library dialog is already opened; Close it first please.'),
@@ -163,18 +461,13 @@ class ChooseLibrary(wx.Dialog):
 				return
 			else:
 				wx.CallAfter(self.openBookDialog, filename)
-			self.Destroy()
-		
+			# We have commented the below line, so that main window will stay open when opening a library, and when closing it focus return to main window.
+			#self.Destroy()
 
 	def openBookDialog(self, filename):
-		#global bookDialog
-		bookDialog= BookDialog(gui.mainFrame, filename)
-		BookDialog.BOOKDIALOG= bookDialog
+		dialog= BookDialog(self, filename)
+		BookDialog.currentInstance= dialog
+		BookDialog.libraryFiles= LibraryDialog.libraryFiles[:]
 
-	def onCancel(self, e):
+	def onCancel(self, evt):
 		self.Destroy()
-
-if __name__== '__main__':
-	x= wx.App()
-	ChooseLibrary(None)
-	x.MainLoop()

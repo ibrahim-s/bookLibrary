@@ -408,7 +408,7 @@ class BookDialog(wx.Dialog):
 		#log.info(f'i: {i}')
 		if i== -1:
 			self.sizeText.Hide()
-			self.anotherUrlText.Hide()
+			self.otherUrlsText.Hide()
 		else:
 			#log.info(f'self.book_keys: {self.book_keys}')
 			#try:

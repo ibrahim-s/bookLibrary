@@ -343,7 +343,7 @@ class BookDialog(wx.Dialog):
 		self.listBox.Bind(wx.EVT_KILL_FOCUS, self.onKillFocus)
 		self.urlText.Bind(wx.EVT_TEXT_ENTER, self.onaccessBook)
 		self.otherUrlsText.Bind(wx.EVT_TEXT_ENTER, self.onAnotherUrl)
-		#self.Bind(wx.EVT_BUTTON, self.onaccessBook, self.accessButton)
+		self.Bind(wx.EVT_BUTTON, self.onaccessBook, self.accessButton)
 		self.Bind(wx.EVT_BUTTON, self.onCancel, self.cancelButton)
 		self.postInit()
 

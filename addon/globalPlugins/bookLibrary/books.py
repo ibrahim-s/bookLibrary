@@ -10,10 +10,11 @@ import json
 from logHandler import log
 
 CURRENT_DIR= os.path.dirname(__file__)
-SAVING_DIR= os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')
+local_DIR= os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles')
 
 class Book(object):
 	myBooks={}
+	saving_dir= local_DIR
 	filename= ""
 
 	def __init__(self, name, author, about, size, url, otherUrls):
@@ -51,7 +52,7 @@ class Book(object):
 	@classmethod
 	def save_to_file(cls):
 		try:
-			with open(os.path.join(SAVING_DIR, cls.filename), 'w', encoding= 'utf-8') as f:
+			with open(os.path.join(cls.saving_dir, cls.filename), 'w', encoding= 'utf-8') as f:
 				json.dump(cls.myBooks, f, ensure_ascii= False, indent= 4)
 			cls.myBooks= {}
 		except Exception as e:
@@ -62,9 +63,10 @@ class Book(object):
 	@classmethod
 	def retreave_from_file(cls):
 		'''Retreaving books from a specific library file.'''
-		if cls.myBooks: return
+		if cls.myBooks: 
+			return
 		try:
-			with open(os.path.join(SAVING_DIR, cls.filename), encoding= 'utf-8') as f:
+			with open(os.path.join(cls.saving_dir, cls.filename), encoding= 'utf-8') as f:
 				d= json.load(f)
 				cls.myBooks= d
 		except Exception as e:

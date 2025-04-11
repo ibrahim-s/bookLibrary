@@ -15,9 +15,6 @@ from .bookdialog import BookDialog
 import addonHandler
 addonHandler.initTranslation()
 
-CURRENT_DIR= os.path.dirname(os.path.abspath(__file__))
-LIBRARIES_DIR= os.path.abspath(os.path.join(os.path.expanduser('~'), 'bookLibrary-addonFiles'))
-
 def addLibrary(message, caption, oldName=None):
 	''' Entering the name of new library, or renaming existing one by passing a value to oldName in this function.'''
 	if oldName:
@@ -265,25 +262,36 @@ class LibraryPopupMenu(wx.Menu):
 			return filename
 
 class LibraryDialog(wx.Dialog):
-	def __init__(self, parent, path):
-		#pathLabel= config.conf["linkLibrary"]["chosenDataPath"]
-		# pathLabel is the label chosen by the user, for the directory that stores the data files
-		# let us take only the basename of the path, after request from users
-		#pathLabel= os.path.basename(pathLabel) if pathLabel.lower().startswith('c:') else pathLabel
-		# Translators: Title of dialog with the path label as suffix.
-		#title= _("Link Library - {}").format(pathLabel)
+	def __init__(self, parent, localLibrariesPath, onlineLibrariesPath):
+		# Translators: Title of dialog
 		title= _("Book Library")
 		super(LibraryDialog, self).__init__(parent, title= title)
-		#self.LIBRARIES_DIR= os.path.join(path, 'linkLibrary-addonFiles')
+		self.localLibrariesPath= localLibrariesPath
+		self.onlineLibrariesPath= onlineLibrariesPath
 		self.createDirectoryIfNotExist()
 
 		panel= wx.Panel(self)
 		mainSizer=wx.BoxSizer(wx.HORIZONTAL)
+		# list of online libraries.
+		listBoxSizer0= wx.BoxSizer(wx.VERTICAL)
+		# Translators: label of libraries list box.
+		staticText0= wx.StaticText(panel, -1, _('Online Libraries'))
+		self.listBox0 = wx.ListBox(panel,-1, style= wx.LB_SINGLE)
+		# Set name attributes, to distinguish between the 2 listboxes when pressing enter on them.
+		self.listBox0.name= "onlineBooks"
+		#self.listBox.Bind(wx.EVT_CONTEXT_MENU, self.OnRightDown)
+		# wx.EVT_CONTEXT_MENU is used in NVDA 2021.1, for wx.EVT_RIGHT_DOWN seized to work.
+		#self.listBox.Bind(wx.EVT_KILL_FOCUS, self.onKillFocus)
+		listBoxSizer0.Add(staticText0, 0, wx.ALL, 5)
+		listBoxSizer0.Add(self.listBox0, 1, wx.ALL|wx.EXPAND, 5)
+		mainSizer.Add(listBoxSizer0, 1, wx.ALL, 5)
+
+		# list of locals libraries
 		listBoxSizer= wx.BoxSizer(wx.VERTICAL)
 		# Translators: label of libraries list box.
-		staticText= wx.StaticText(panel, -1, _('Choose a library'))
+		staticText= wx.StaticText(panel, -1, _('Local Libraries'))
 		self.listBox = wx.ListBox(panel,-1, style= wx.LB_SINGLE)
-		#self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
+		self.listBox.name= "localBooks"
 		self.listBox.Bind(wx.EVT_CONTEXT_MENU, self.OnRightDown)
 		# wx.EVT_CONTEXT_MENU is used in NVDA 2021.1, for wx.EVT_RIGHT_DOWN seized to work.
 		self.listBox.Bind(wx.EVT_KILL_FOCUS, self.onKillFocus)
@@ -295,38 +303,37 @@ class LibraryDialog(wx.Dialog):
 		# Add library button
 		self.add= wx.Button(panel, wx.ID_ANY,
 		# Translators: Label of Add button
-		_("Add"))
+		_("Add local library"))
 		self.add.Bind(wx.EVT_BUTTON, self.onAdd)
 		buttonSizer.Add(self.add, 1,wx.ALL, 10)
+
 		# Rename button
 		self.rename= wx.Button(panel, wx.ID_ANY,
 		# Translators: Label of Rename button
-		_("Rename"))
+		_("Rename library"))
 		self.rename.Bind(wx.EVT_BUTTON, self.onRename)
 		buttonSizer.Add(self.rename, 1,wx.ALL, 10)
+
 		# Remove button
 		self.remove= wx.Button(panel, wx.ID_ANY,
 		# Translators: Label of Remove button
-		_("Remove"))
+		_("Remove library"))
 		self.remove.Bind(wx.EVT_BUTTON, self.onRemove)
 		buttonSizer.Add(self.remove, 1,wx.ALL, 10)
-		self.ok= wx.Button(panel, wx.ID_OK,
-		# Translators: Label of OK button
-		_('OK'))
-		self.ok.SetDefault()
-		self.ok.Bind(wx.EVT_BUTTON, self.onOk)
-		buttonSizer.Add(self.ok, 1,wx.ALL, 10)
-		self.cancel= wx.Button(panel, wx.ID_CANCEL,
-		# Translators: Label of Cancel button
-		_("Cancel"))
-		self.cancel.Bind(wx.EVT_BUTTON, self.onCancel)
-		buttonSizer.Add(self.cancel, 0, wx.EXPAND|wx.ALL, 10)
+
+		self.close = wx.Button(panel, wx.ID_CANCEL,
+		# Translators: Label of Close button
+		_("Close"))
+		self.close.Bind(wx.EVT_BUTTON, self.onClose)
+		buttonSizer.Add(self.close, 0, wx.EXPAND|wx.ALL, 10)
 		mainSizer.Add(buttonSizer, 0, wx.EXPAND|wx.ALL, 5)
 		panel.SetSizer(mainSizer)
+		self.Bind(wx.EVT_CHAR_HOOK, self.onEnterPressed)
 		self.postInit()
 
+
 	def createDirectoryIfNotExist(self):
-		path= LIBRARIES_DIR
+		path= self.localLibrariesPath
 		#path is the full path, with the base folder of the directory.
 		if os.path.isdir(path):
 			return
@@ -344,23 +351,29 @@ class LibraryDialog(wx.Dialog):
 
 	def postInit(self):
 		#log.info('under postInit of libraries file dialog...')
-		foundFiles= [os.path.splitext(f) for f in os.listdir(LIBRARIES_DIR)]
+		self.populateListBox(self.localLibrariesPath, self.listBox)
+		self.populateListBox(self.onlineLibrariesPath, self.listBox0)
+		self.Raise()
+		self.Show()
+
+	def populateListBox(self, path, listbox):
+		# listbox could be either for local or online libraries.
+		foundFiles= [os.path.splitext(f) for f in os.listdir(path)]
 		# foundFiles is a list of tuples, first element of the tuple is the name of file and the second is it's extension
 		libraryFiles= sorted([name for name, ext in foundFiles if ext== '.json'], key= lambda s: s.lower())
 		# We picked only .json files, even if there are other files in the folder.
-		LibraryDialog.libraryFiles= libraryFiles
-		self.listBox.Set(libraryFiles)
+		if listbox== self.listBox:
+			LibraryDialog.libraryFiles= libraryFiles
+		listbox.Set(libraryFiles)
 		#log.info(f'list count:{self.listBox.GetCount()}')
-		if self.listBox.GetCount()> 0:
-			self.listBox.SetSelection(0)
-		self.Raise()
-		self.Show()
+		if listbox.GetCount()> 0:
+			listbox.SetSelection(0)
 
 	def OnRightDown(self, e):
 		#log.info('under right down handler') 
 		obj= e.GetEventObject()
 		id= obj.GetId()
-		menu= LibraryPopupMenu(self, LIBRARIES_DIR, id)
+		menu= LibraryPopupMenu(self, self.localLibrariesPath, id)
 		self.PopupMenu(menu, e.GetPosition())
 		menu.Destroy()
 		#log.info('destroying pop up menu')
@@ -375,7 +388,7 @@ class LibraryDialog(wx.Dialog):
 		if not name:
 			return
 		filename= api.filterFileName(name)+'.json'
-		filepath= os.path.join(LIBRARIES_DIR, filename)
+		filepath= os.path.join(self.localLibrariesPath, filename)
 		#log.info('filepath to add: %s'%filepath)
 		try:
 			with open(filepath, 'w') as f:
@@ -402,7 +415,7 @@ class LibraryDialog(wx.Dialog):
 			return
 		else:
 			newname= api.filterFileName(newname)
-			os.rename(os.path.join(LIBRARIES_DIR, oldName+'.json'), os.path.join(LIBRARIES_DIR, newname+'.json'))
+			os.rename(os.path.join(self.localLibrariesPath, oldName+'.json'), os.path.join(self.localLibrariesPath, newname+'.json'))
 			#log.info(LibraryDialog.libraryFiles)
 			LibraryDialog.libraryFiles.append(newname)
 			LibraryDialog.libraryFiles.sort(key= str.lower)
@@ -419,7 +432,7 @@ class LibraryDialog(wx.Dialog):
 		# Translators: Title of dialog.
 		_('Warning'), wx.ICON_QUESTION | wx.YES_NO)== wx.NO:
 			return
-		os.remove(os.path.join(LIBRARIES_DIR, toRemove+'.json'))
+		os.remove(os.path.join(self.localLibrariesPath, toRemove+'.json'))
 		LibraryDialog.libraryFiles.remove(toRemove)
 		sel= i if i!= numItems-1 else i-1
 		#log.info(f'sel after onRemove: {sel}')
@@ -447,27 +460,47 @@ class LibraryDialog(wx.Dialog):
 		self.remove.Enabled= state
 		evt.Skip()
 
-	def onOk(self, evt):
-		#log.info('under ok button')
-		i= self.listBox.GetSelection()
-		if i != -1:
-			filename= self.libraryFiles[i]
-			if  BookDialog.currentInstance:
-				gui.messageBox(
-				# Translators: Message be displayed when a library dialog is already opened.
+	def onEnterPressed(self, evt):
+		if evt.KeyCode in (wx.WXK_RETURN, wx.WXK_NUMPAD_ENTER):
+			#log.info('Enter key has been pressed ...')
+			obj= evt.GetEventObject()
+			#log.info(f'eventObj: {obj}')
+			#log.info(f'name: {obj.name}')
+			self.prepareToOpenLibrary(obj)
+		else:
+			evt.Skip()
+
+	def prepareToOpenLibrary(self, listboxObject):
+		#log.info('under prepareToOpenLibrary method ')
+		if  BookDialog.currentInstance:
+			gui.messageBox(
+			# Translators: Message be displayed when a library dialog is already opened.
 			_('A library dialog is already opened; Close it first please.'),
 			# Translators: Title of dialog.
 			_('information'))
-				return
-			else:
-				wx.CallAfter(self.openBookDialog, filename)
-			# We have commented the below line, so that main window will stay open when opening a library, and when closing it focus return to main window.
-			#self.Destroy()
+			return
+		i= listboxObject.GetSelection()
+		#log.info(f'i: {i}')
+		if i == -1:
+			return
+		if listboxObject.name== "localBooks":
+			filename= self.libraryFiles[i]
+			path = self.localLibrariesPath
+			isLocal= True # parameter to be passed to BookDialog
+		elif listboxObject.name== "onlineBooks":
+			filename= listboxObject.GetStringSelection()
+			path= self.onlineLibrariesPath
+			isLocal= False
+		wx.CallAfter(self.openBookDialog, filename, path, isLocal)
+		# We have commented the below line, so that main window will stay open when opening a library, and when closing it focus return to main window.
+		#self.Destroy()
 
-	def openBookDialog(self, filename):
-		dialog= BookDialog(self, filename)
+	def openBookDialog(self, filename, path, isLocal):
+		dialog= BookDialog(self, filename, path, isLocal)
 		BookDialog.currentInstance= dialog
-		BookDialog.libraryFiles= LibraryDialog.libraryFiles[:]
+		if isLocal:
+		# We will not change online libraryFiles, so send  only local libraryFiles to BookDialog.
+			BookDialog.libraryFiles= LibraryDialog.libraryFiles[:]
 
-	def onCancel(self, evt):
+	def onClose(self, evt):
 		self.Destroy()

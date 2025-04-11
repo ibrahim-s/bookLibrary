@@ -9,7 +9,6 @@ import os
 import api
 import queueHandler
 from .books import Book
-from .books import SAVING_DIR
 import json
 from logHandler import log
 
@@ -84,6 +83,7 @@ class MyPopupMenu(wx.Menu):
 		super(MyPopupMenu, self).__init__()
         
 		self.parent = parent
+		#log.info(f'self.parent.libraryDirectory: {self.parent.libraryDirectory}')
 		self.eventObjectId= eventObjectId
 
 #add a subMenu for change sorting of book
@@ -99,6 +99,9 @@ class MyPopupMenu(wx.Menu):
 		_('Sort Books By'))
 		self.Bind(wx.EVT_MENU, self.onSortByName, self.sortByName)
 		self.Bind(wx.EVT_MENU, self.onSortByAuthor, self.sortByAuthor)
+		# in online libraries we only need sort by menu.
+		if not self.parent.isLocalLibrary:
+			return
 
 		#Add A Book menu
 		add= wx.MenuItem(self, -1, 
@@ -238,7 +241,7 @@ class MyPopupMenu(wx.Menu):
 		#log.info(f'libraryFileName: {libraryFileName}')
 		# retreaving library data
 		try:
-			with open(os.path.join(SAVING_DIR, libraryFileName), encoding= 'utf-8') as f:
+			with open(os.path.join(self.parent.libraryDirectory, libraryFileName), encoding= 'utf-8') as f:
 				libraryDict= json.load(f)
 			if book.key in libraryDict:
 				if gui.messageBox(
@@ -251,7 +254,7 @@ class MyPopupMenu(wx.Menu):
 				wx.YES|wx.NO|wx.ICON_QUESTION)== wx.NO:
 					return
 			libraryDict[book.key]= {"about": book.about, "size": book.size, "url": book.url, "otherUrls": book.otherUrls}
-			with open(os.path.join(SAVING_DIR, libraryFileName), 'w', encoding= 'utf-8') as f:
+			with open(os.path.join(self.parent.libraryDirectory, libraryFileName), 'w', encoding= 'utf-8') as f:
 				json.dump(libraryDict, f, ensure_ascii= False, indent= 4)
 		except Exception as e:
 			# Translators: Message displayed when getting an error trying to move a link from one library to another.
@@ -285,12 +288,17 @@ class BookDialog(wx.Dialog):
 	currentInstance = None
 	sortByAuthor= False
 
-	def __init__(self, parent, filename):
+	def __init__(self, parent, filename, libraryDirectory, isLocalLibrary: bool):
 		super(BookDialog, self).__init__(parent, -1, title= filename, 
 		size=(500, 400))
-		# make class attribute for active library.
-		BookDialog.activeLibrary= filename
 		self.filename= filename
+		self.libraryDirectory= libraryDirectory
+		self.isLocalLibrary= isLocalLibrary
+		#log.info(f'self.isLocalLibrary: {self.isLocalLibrary}')
+		Book.saving_dir								= self.libraryDirectory
+		#if self.isLocalLibrary:
+			# make class attribute for active library.
+		BookDialog.activeLibrary= filename
 		#sending the filename to the Book class
 		Book.filename= filename + ".json"
 
@@ -329,30 +337,35 @@ class BookDialog(wx.Dialog):
 		# Translators: Label of Access book button.
 		self.accessButton= wx.Button(panel, -1, label= _("Access book"))
 
-		#Label of Cancel button.
-		self.cancelButton= wx.Button(panel, id= wx.ID_CANCEL, label= _("Cancel"))
+		#Label of close button.
+		self.closeButton= wx.Button(panel, id= wx.ID_CANCEL, label= _("Close"))
 
 		sizer = wx.FlexGridSizer(cols=2, hgap=6, vgap=6)
-		sizer.AddMany([listLabel, self.listBox, aboutLabel, self.aboutText, sizeLabel, self.sizeText,urlLabel, self.urlText, otherUrlsLabel, self.otherUrlsText, self.accessButton, self.cancelButton])
+		sizer.AddMany([listLabel, self.listBox, aboutLabel, self.aboutText, sizeLabel, self.sizeText,urlLabel, self.urlText, otherUrlsLabel, self.otherUrlsText, self.accessButton, self.closeButton])
 		panel.SetSizer(sizer)
 
 		#make bindings
-		#self.listBox.Bind(wx.EVT_RIGHT_DOWN, self.OnRightDown)
 		#wx.EVT_CONTEXT_MENU is used in NVDA 2021.1,for wx.EVT_RIGHT_DOWN seized to work.
 		self.listBox.Bind(wx.EVT_CONTEXT_MENU, self.OnRightDown)
 		self.listBox.Bind(wx.EVT_KILL_FOCUS, self.onKillFocus)
 		self.urlText.Bind(wx.EVT_TEXT_ENTER, self.onaccessBook)
 		self.otherUrlsText.Bind(wx.EVT_TEXT_ENTER, self.onAnotherUrl)
 		self.Bind(wx.EVT_BUTTON, self.onaccessBook, self.accessButton)
-		self.Bind(wx.EVT_BUTTON, self.onCancel, self.cancelButton)
+		self.Bind(wx.EVT_BUTTON, self.onCancel, self.closeButton)
 		self.postInit()
 
 	def postInit(self):
 		self.accessButton.SetDefault()
+		#if not self.isLocalLibrary:
+			#self.populateWithOnlineLibrary()
+			#return
 		self.populateListBox()
 		self.focusAndSelect()
 		self.Raise()
 		self.Show()
+
+	def populateWithOnlineLibrary(self):
+		pass
 
 	def populateListBox(self, sortByAuthor= False):
 		Book.retreave_from_file()
@@ -385,7 +398,6 @@ class BookDialog(wx.Dialog):
 			return
 		if not bookKey:
 			self.listBox.SetSelection(0)
-			#self.listBox.SetFocus()
 		else:
 			i= self.book_keys.index(bookKey)
 			self.listBox.SetSelection(i)
@@ -429,8 +441,6 @@ class BookDialog(wx.Dialog):
 
 	def showOrHideControl(self, control, value):
 		control.SetValue(value)
-		#if control== self.otherUrlsText:
-			#control.SetSelection(0, -1)
 		if value and not control.IsShown():
 			control.Show()
 		elif not value and control.IsShown():
@@ -484,7 +494,9 @@ class BookDialog(wx.Dialog):
 
 	def onCancel(self, evt):
 		#log.info('under onCancel') 
-		if Book.myBooks:
+		if not self.isLocalLibrary:
+			Book.myBooks= {}
+		if self.isLocalLibrary and Book.myBooks:
 			Book.save_to_file()
 		self.Destroy()
 """
@@ -493,8 +505,3 @@ class BookDialog(wx.Dialog):
 		if Book.myBooks:
 			Book.save_to_file()
 """
-if __name__ == '__main__':
-	app = wx.App()
-	frame = BookDialog(None, 'hello')
-	frame.postInit()
-	app.MainLoop()

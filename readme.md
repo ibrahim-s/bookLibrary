@@ -2,9 +2,12 @@
 
 Author: Ibrahim Hamadeh  
 NVDA compatibility: 2019.3 and later  
-Download [version 2.2.2][1]  
+Download [version 2.2.3][1]  
 
-This addon helps the user to arrange his downloadable or online books in library like way.  
+This addon helps the user to view and access his downloadable or online books
+At the same time he can arrange his local books in library like way.  
+he can add, edit or remove any of his local libraries or books. 
+
 From the main dialog of libraries, you can choose the library you like and press enter on it.  
 You can in this dialog, add, Rename or remove any libraries at any time.  
 On the library dialog, you can read informations about the books, size of file, the link, and other links if present.  
@@ -28,6 +31,11 @@ NVDA menu>preferences>inputGestures>Book Library.
 *	Stand on the library you want to export and press the contact menu, arrow down once to Export library as, choose html or json, and press enter.  
 *	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
 *	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
+
+### Changes for version 2.2.3 ###
+
+*	Now we have two list of libraries, online and local libraries. 
+online libraries are only available for Arabic language  for the time being.
 
 ### Changes for version 2.2.2 ###
 
@@ -69,4 +77,4 @@ Doing that, so that all instances of the book library addon in the installed or 
 
 In the case of any bugs or suggestion you can [send me an email.](mailto:ibra.hamadeh@hotmail.com)
 
-[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.2/bookLibrary-2.2.2.nvda-addon
+[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.3/bookLibrary-2.2.3.nvda-addon

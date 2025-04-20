@@ -8,55 +8,51 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 'bookLibrary' '2.2.1'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2024-05-19 07:11+0300\n"
-"PO-Revision-Date: 2024-05-20 02:29+0300\n"
+"POT-Creation-Date: 2025-04-20 19:34+0300\n"
+"PO-Revision-Date: 2025-04-20 19:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#. pathLabel= config.conf["linkLibrary"]["chosenDataPath"]
-#. pathLabel is the label chosen by the user, for the directory that stores the data files
-#. let us take only the basename of the path, after request from users
-#. pathLabel= os.path.basename(pathLabel) if pathLabel.lower().startswith('c:') else pathLabel
-#. Translators: Title of dialog with the path label as suffix.
-#. title= _("Link Library - {}").format(pathLabel)
-#. Add-on summary, usually the user visible name of the addon.
-#. Translators: Summary for this add-on
-#. to be shown on installation and add-on information found in Add-ons Manager.
-#: addon\globalPlugins\bookLibrary\__init__.py:16
-#: addon\globalPlugins\bookLibrary\maindialog.py:275 buildVars.py:23
-msgid "Book Library"
-msgstr "مكتبةُ الكتب"
-
-#. Translators: message displayed in input help mode for openning  choose library dialog.
-#: addon\globalPlugins\bookLibrary\__init__.py:28
+#. Translators: Message displayed in input help mode.
+#: addon\globalPlugins\bookLibrary\__init__.py:42
 msgid "Open Book Library dialog."
 msgstr "فتح محاورةْ مكتبةْ الكتب."
 
+#. Translators: Category of addon in input gestures.
+#. Translators: Title of dialog
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on
+#. to be shown on installation and add-on information found in Add-ons Manager.
+#: addon\globalPlugins\bookLibrary\__init__.py:45
+#: addon\globalPlugins\bookLibrary\maindialog.py:267 buildVars.py:23
+msgid "Book Library"
+msgstr "مكتبةُ الكتب"
+
 #. Translators: message displayed when the user leaves the book name entry blank.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:31
+#: addon\globalPlugins\bookLibrary\bookdialog.py:30
 msgid "Name required; You can not leave it blank"
 msgstr "إسم الكتاب مطلوب; لا يمكن تركه فارغا"
 
 #. Translators: Title of dialog.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:32
-#: addon\globalPlugins\bookLibrary\maindialog.py:460
+#: addon\globalPlugins\bookLibrary\bookdialog.py:31
+#: addon\globalPlugins\bookLibrary\maindialog.py:480
 msgid "information"
 msgstr "تعليمات"
 
 #. Translators: message displayed when the user did not enter a url.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:68
+#: addon\globalPlugins\bookLibrary\bookdialog.py:67
 msgid "You can not leave this blank, please enter a url."
 msgstr "لا يمكنك تركه فارغا, فضلا أدخل رابط."
 
 #. Translators: Title of message box
-#: addon\globalPlugins\bookLibrary\bookdialog.py:69
-#: addon\globalPlugins\bookLibrary\maindialog.py:237
+#: addon\globalPlugins\bookLibrary\bookdialog.py:68
+#: addon\globalPlugins\bookLibrary\maindialog.py:234
 msgid "Information"
 msgstr "تعليمات"
 
@@ -76,50 +72,50 @@ msgid "Sort Books By"
 msgstr "ترتيب الكتب حسب"
 
 #. Translators: label obj menu items to add a book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:106
+#: addon\globalPlugins\bookLibrary\bookdialog.py:109
 msgid "Add A Book"
 msgstr "أضِف كتاب"
 
 #. Translators: label of menu items to edit a book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:113
+#: addon\globalPlugins\bookLibrary\bookdialog.py:116
 msgid "Edit Selected "
 msgstr "تعديل الكتاب المحدد "
 
 #. Translators: label of menu items to remove a book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:120
+#: addon\globalPlugins\bookLibrary\bookdialog.py:123
 msgid "Remove Selected "
 msgstr "إزالةْ الكتاب "
 
 #. Translators: label obj subMenu items for moving a book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:136
+#: addon\globalPlugins\bookLibrary\bookdialog.py:139
 msgid "Move Book To"
 msgstr "نقل الكتاب إلى"
 
 #. Translators: label of menu items to remove all books.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:141
+#: addon\globalPlugins\bookLibrary\bookdialog.py:144
 msgid "Remove All "
 msgstr "إزالةْ جميع الكتب "
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:159
+#: addon\globalPlugins\bookLibrary\bookdialog.py:162
 msgid "EnterBook Name Please"
 msgstr "أَدخِلْ اسم الكتاب فضلا"
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:160
+#: addon\globalPlugins\bookLibrary\bookdialog.py:163
 msgid "Book Name"
 msgstr "إسم الكتاب"
 
 #. log.info('name: %s'%name)
 #. getting the author
-#: addon\globalPlugins\bookLibrary\bookdialog.py:164
+#: addon\globalPlugins\bookLibrary\bookdialog.py:167
 msgid "Enter Author Name"
 msgstr "أَدخِلْ إسم المؤلف فضلا"
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:165
+#: addon\globalPlugins\bookLibrary\bookdialog.py:168
 msgid "Author name"
 msgstr "إسم المؤلف"
 
 #. Translators: message displayed if book is already present in library.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:170
+#: addon\globalPlugins\bookLibrary\bookdialog.py:173
 msgid ""
 "This book already exist in library, please enter a new one or remove existed "
 "first"
@@ -130,62 +126,62 @@ msgstr ""
 #. Translators: Title of message box.
 #. Translators: Title of messagebox.
 #. Translators: Title of dialog.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:172
-#: addon\globalPlugins\bookLibrary\bookdialog.py:215
-#: addon\globalPlugins\bookLibrary\bookdialog.py:250
-#: addon\globalPlugins\bookLibrary\bookdialog.py:276
-#: addon\globalPlugins\bookLibrary\maindialog.py:32
-#: addon\globalPlugins\bookLibrary\maindialog.py:420
+#: addon\globalPlugins\bookLibrary\bookdialog.py:175
+#: addon\globalPlugins\bookLibrary\bookdialog.py:218
+#: addon\globalPlugins\bookLibrary\bookdialog.py:253
+#: addon\globalPlugins\bookLibrary\bookdialog.py:279
+#: addon\globalPlugins\bookLibrary\maindialog.py:29
+#: addon\globalPlugins\bookLibrary\maindialog.py:433
 msgid "Warning"
 msgstr "تحذير"
 
 #. getting the about of the book
-#: addon\globalPlugins\bookLibrary\bookdialog.py:175
+#: addon\globalPlugins\bookLibrary\bookdialog.py:178
 msgid "Write Something About The Book"
 msgstr "أَدخِلْ شيئا عن الكتاب"
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:176
+#: addon\globalPlugins\bookLibrary\bookdialog.py:179
 msgid "About"
 msgstr "حول الكتاب"
 
 #. getting size of book
-#: addon\globalPlugins\bookLibrary\bookdialog.py:179
+#: addon\globalPlugins\bookLibrary\bookdialog.py:182
 msgid "Enter Size of Book or file"
 msgstr "أدخل حجم الكتاب أو الملف"
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:180
+#: addon\globalPlugins\bookLibrary\bookdialog.py:183
 msgid "size"
 msgstr "الحجم"
 
 #. log.info('size: %s'%size)
 #. getting the url of the book
-#: addon\globalPlugins\bookLibrary\bookdialog.py:184
+#: addon\globalPlugins\bookLibrary\bookdialog.py:187
 msgid "Enter Url source to access book(www...)"
 msgstr "أدخل رابط للوصول إلى الكتاب (www...)"
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:185
+#: addon\globalPlugins\bookLibrary\bookdialog.py:188
 msgid "Url:"
 msgstr "الرابط:"
 
 #. log.info('url: %s'%url)
 #. getting book Other urls
-#: addon\globalPlugins\bookLibrary\bookdialog.py:189
+#: addon\globalPlugins\bookLibrary\bookdialog.py:192
 msgid "Enter other urls for the book if present, or leave blank"
 msgstr "أدخِلْ روابط أخرى للكتاب إن وُجدت, أو اتركه فارغا"
 
-#: addon\globalPlugins\bookLibrary\bookdialog.py:190
+#: addon\globalPlugins\bookLibrary\bookdialog.py:193
 msgid "Othr urls:"
 msgstr "روابط أُخرى:"
 
 #. Translators: Message displayed when trying to remove a book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:213
+#: addon\globalPlugins\bookLibrary\bookdialog.py:216
 msgid "Are you sure you want to remove {} by {}?, this can not be undone."
 msgstr ""
 "هل أنت متأكد من أنك تريد حذف كتاب {} لصاحبه {}?, هذا الإجراء لا يمكن التراجع "
 "عنه."
 
 #. Translators: Message displayed when trying to move a book already present in the other library.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:246
+#: addon\globalPlugins\bookLibrary\bookdialog.py:249
 msgid ""
 "This book is already present in {library} library, under {label} label;\n"
 " Do you still want to replace it with the one you are about to move?."
@@ -194,230 +190,229 @@ msgstr ""
 " هل مازلت تريد استبداله بالذي أنت على وشك نقله؟."
 
 #. Translators: Message displayed when getting an error trying to move a link from one library to another.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:258
+#: addon\globalPlugins\bookLibrary\bookdialog.py:261
 msgid "Unable to move the book to another library"
 msgstr "ليس بالإمكان نقل الكتاب إلى مكتبة أخرى"
 
 #. Translators: Title of message box
 #. Translators: title of error dialog .
 #. Translators: Title of message box
-#: addon\globalPlugins\bookLibrary\bookdialog.py:260
-#: addon\globalPlugins\bookLibrary\books.py:74
-#: addon\globalPlugins\bookLibrary\maindialog.py:136
-#: addon\globalPlugins\bookLibrary\maindialog.py:154
-#: addon\globalPlugins\bookLibrary\maindialog.py:180
-#: addon\globalPlugins\bookLibrary\maindialog.py:219
+#: addon\globalPlugins\bookLibrary\bookdialog.py:263
+#: addon\globalPlugins\bookLibrary\books.py:76
+#: addon\globalPlugins\bookLibrary\maindialog.py:133
+#: addon\globalPlugins\bookLibrary\maindialog.py:151
+#: addon\globalPlugins\bookLibrary\maindialog.py:177
+#: addon\globalPlugins\bookLibrary\maindialog.py:216
 msgid "Error"
 msgstr "خَطَأ"
 
 #. Translators: Message displayed when trying to remove all books.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:274
+#: addon\globalPlugins\bookLibrary\bookdialog.py:277
 msgid ""
-"Are you sure you want to remove all books from this library?, this can not "
-"be undone."
+"Are you sure you want to remove all books from this library?, this can not be "
+"undone."
 msgstr ""
 "هل أنت متأكد من أنك تريد حذف جميع الكتب في هذه المكتبة؟ هذا الإجراء لا يمكن "
 "التراجع عنه."
 
 #. Translators: Label of about the book text control.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:303
+#: addon\globalPlugins\bookLibrary\bookdialog.py:311
 msgid "About The Book"
 msgstr "حول الكتاب"
 
 #. Translators: Label of size of book file text control.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:310
+#: addon\globalPlugins\bookLibrary\bookdialog.py:318
 msgid "Size of Book:"
 msgstr "حجم الكتاب:"
 
 #. Translators: Label of the text control that shows the url .
-#: addon\globalPlugins\bookLibrary\bookdialog.py:315
+#: addon\globalPlugins\bookLibrary\bookdialog.py:323
 msgid "Book Url:"
 msgstr "رابط الكتاب:"
 
 #. Translators: Label of text control that displays the othe urls for the book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:321
+#: addon\globalPlugins\bookLibrary\bookdialog.py:329
 msgid "Other Urls for the book:"
 msgstr "روابط أخرى للكتاب:"
 
 #. size=(175, -1), style= wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_NO_VSCROLL|wx.TE_PROCESS_ENTER)
 #. self.anotherUrlText.SetSelection(0, -1)
 #. Translators: Label of Access book button.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:330
+#: addon\globalPlugins\bookLibrary\bookdialog.py:338
 msgid "Access book"
 msgstr "الوصول للكتاب"
 
-#. Label of Cancel button.
-#. Translators: Label of Cancel button
-#: addon\globalPlugins\bookLibrary\bookdialog.py:333
-#: addon\globalPlugins\bookLibrary\maindialog.py:321
-msgid "Cancel"
-msgstr "إلغاء"
+#. Label of close button.
+#. Translators: Label of Close button
+#: addon\globalPlugins\bookLibrary\bookdialog.py:341
+#: addon\globalPlugins\bookLibrary\maindialog.py:326
+msgid "Close"
+msgstr "إغلاق"
 
 #. Translators: Phrase to be put between name and author of the book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:367
-#: addon\globalPlugins\bookLibrary\maindialog.py:47
+#: addon\globalPlugins\bookLibrary\bookdialog.py:380
+#: addon\globalPlugins\bookLibrary\maindialog.py:44
 msgid " by "
 msgstr " تأليف "
 
 #. lst= [x+u' في '+y if x else y for x,y in temp]
 #. Translators: Phrase to be put between author and name of the book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:375
+#: addon\globalPlugins\bookLibrary\bookdialog.py:388
 msgid " in "
 msgstr " في "
 
 #. Translators: Message displayed when getting an error trying to retreave books data
-#: addon\globalPlugins\bookLibrary\books.py:72
+#: addon\globalPlugins\bookLibrary\books.py:74
 msgid "Unable to load books data"
 msgstr "ليس بالإمكان الحصول على بيانات الكتب"
 
 #. Translators: message displayed when the name is present for another library.
-#: addon\globalPlugins\bookLibrary\maindialog.py:30
+#: addon\globalPlugins\bookLibrary\maindialog.py:27
 msgid ""
 "This name is already present for another library, enter another name please"
 msgstr "هذا الاسم موجود بالفعل لمكتبة أخرى، أدخل اسم آخر من فضلك"
 
-#: addon\globalPlugins\bookLibrary\maindialog.py:44
+#: addon\globalPlugins\bookLibrary\maindialog.py:41
 msgid "Audio Library"
 msgstr "المكتبة الصوتية"
 
-#: addon\globalPlugins\bookLibrary\maindialog.py:44
+#: addon\globalPlugins\bookLibrary\maindialog.py:41
 msgid "Library: "
 msgstr "المكتبة: "
 
-#: addon\globalPlugins\bookLibrary\maindialog.py:48
+#: addon\globalPlugins\bookLibrary\maindialog.py:45
 msgid "Access the book:"
 msgstr "الوصول للكتاب:"
 
-#: addon\globalPlugins\bookLibrary\maindialog.py:53
+#: addon\globalPlugins\bookLibrary\maindialog.py:50
 msgid "Other links for the book:"
 msgstr "روابط أخرى للكتاب:"
 
-#: addon\globalPlugins\bookLibrary\maindialog.py:57
+#: addon\globalPlugins\bookLibrary\maindialog.py:54
 msgid "About the book:"
 msgstr "حول الكتاب:"
 
 #. Translators: label of menu to export library as json file
-#: addon\globalPlugins\bookLibrary\maindialog.py:99
+#: addon\globalPlugins\bookLibrary\maindialog.py:96
 msgid "Json File"
 msgstr "ملف بصيغةْ json"
 
 #. Translators: label of menu to export library as html.
-#: addon\globalPlugins\bookLibrary\maindialog.py:102
+#: addon\globalPlugins\bookLibrary\maindialog.py:99
 msgid "Html File"
 msgstr "ملف بصيغةْ html"
 
 #. Translators: label obj subMenu items for exporting a library.
-#: addon\globalPlugins\bookLibrary\maindialog.py:105
+#: addon\globalPlugins\bookLibrary\maindialog.py:102
 msgid "Export Library As"
 msgstr "تصدير المكتبة بصيغة"
 
 #. Translators: label obj menu items to import a library.
-#: addon\globalPlugins\bookLibrary\maindialog.py:112
+#: addon\globalPlugins\bookLibrary\maindialog.py:109
 msgid "Import Library(as Json)"
 msgstr "استيراد مكتبة(بصيغة json)"
 
 #. Translators: message of error dialog displayed when cannot export library file.
-#: addon\globalPlugins\bookLibrary\maindialog.py:134
-#: addon\globalPlugins\bookLibrary\maindialog.py:178
+#: addon\globalPlugins\bookLibrary\maindialog.py:131
+#: addon\globalPlugins\bookLibrary\maindialog.py:175
 msgid "Failed to export library"
 msgstr "لم ننجح بتصدير المكتبة"
 
 #. Translators: Message presented when library has been exported.
-#: addon\globalPlugins\bookLibrary\maindialog.py:142
-#: addon\globalPlugins\bookLibrary\maindialog.py:186
+#: addon\globalPlugins\bookLibrary\maindialog.py:139
+#: addon\globalPlugins\bookLibrary\maindialog.py:183
 msgid "Information: Library Exported"
 msgstr "تعليمات: لقد تم تصدير المكتبة"
 
-#: addon\globalPlugins\bookLibrary\maindialog.py:153
+#: addon\globalPlugins\bookLibrary\maindialog.py:150
 msgid "Failed to open library, or may be library file is not valid."
 msgstr "لم ننجح في فتح المكتبة, و ربما يكون ملف المكتبة غير صالح."
 
 #. validation of the json file did not succeed
 #. Translators: Message to be displayed when import fails due to validation problem
-#: addon\globalPlugins\bookLibrary\maindialog.py:205
+#: addon\globalPlugins\bookLibrary\maindialog.py:202
 msgid "Importfailed; chosen file seems not valid."
 msgstr "فشِل الاستيراد؛ الملف المختار يبدو غير صالح."
 
 #. Translators: Title of message box
-#: addon\globalPlugins\bookLibrary\maindialog.py:207
+#: addon\globalPlugins\bookLibrary\maindialog.py:204
 msgid "Import Error"
 msgstr "خَطَأ استيراد"
 
 #. Translators: Message displayed when importing failed after validation succeeded
-#: addon\globalPlugins\bookLibrary\maindialog.py:217
+#: addon\globalPlugins\bookLibrary\maindialog.py:214
 msgid "Sorry, importing of library failed"
 msgstr "عذرًا، تمَّ الفشل استيراد المكتبة"
 
 #. Translators: Message presented when library has been imported.
-#: addon\globalPlugins\bookLibrary\maindialog.py:229
+#: addon\globalPlugins\bookLibrary\maindialog.py:226
 msgid "Information: Library imported."
 msgstr "تعليمات: تمَّ استيراد المكتبة."
 
 #. Translators: Ask the user if he wants to merge the two libraries or not.
-#: addon\globalPlugins\bookLibrary\maindialog.py:235
+#: addon\globalPlugins\bookLibrary\maindialog.py:232
 msgid ""
 "A library with similar name already exists, do you want to merge the two "
 "libraries?"
 msgstr "توجد مكتبة بنفس الاسم بالفعل، هل تريد دمج المكتبتين؟"
 
 #. Translators: label of libraries list box.
-#: addon\globalPlugins\bookLibrary\maindialog.py:284
-msgid "Choose a library"
-msgstr "اخترْ مكتبة"
+#: addon\globalPlugins\bookLibrary\maindialog.py:278
+msgid "Online Libraries"
+msgstr "مكتبات على الإنترنت"
+
+#. Translators: label of libraries list box.
+#: addon\globalPlugins\bookLibrary\maindialog.py:292
+msgid "Local Libraries"
+msgstr "مكتبات محلِيَّة"
 
 #. Translators: Label of Add button
-#: addon\globalPlugins\bookLibrary\maindialog.py:298
-msgid "Add"
-msgstr "إضافة"
+#: addon\globalPlugins\bookLibrary\maindialog.py:306
+msgid "Add local library"
+msgstr "أضِف مكتبة محلِيَّة"
 
 #. Translators: Label of Rename button
-#: addon\globalPlugins\bookLibrary\maindialog.py:304
-msgid "Rename"
-msgstr "إعادةْ التسمية"
+#: addon\globalPlugins\bookLibrary\maindialog.py:313
+msgid "Rename library"
+msgstr "إعادة تسميةْ المكتبة"
 
 #. Translators: Label of Remove button
-#: addon\globalPlugins\bookLibrary\maindialog.py:310
-msgid "Remove"
-msgstr "إزالة"
-
-#. Translators: Label of OK button
-#: addon\globalPlugins\bookLibrary\maindialog.py:315
-msgid "OK"
-msgstr "موافق"
+#: addon\globalPlugins\bookLibrary\maindialog.py:320
+msgid "Remove library"
+msgstr "إزالةْ المكتبة"
 
 #. Translators: Message displayed when failing to create new directory for data files
-#: addon\globalPlugins\bookLibrary\maindialog.py:342
+#: addon\globalPlugins\bookLibrary\maindialog.py:349
 msgid "Information:Failed to create directory."
 msgstr "تعليمات: فشلنا في إنشاء مسار."
 
 #. Translators: Message displayed when adding a new library.
-#: addon\globalPlugins\bookLibrary\maindialog.py:370
+#: addon\globalPlugins\bookLibrary\maindialog.py:383
 msgid "Enter library name please"
 msgstr "أدخل اسم المكتبة من فضلك"
 
 #. Translators: Title of dialog.
-#: addon\globalPlugins\bookLibrary\maindialog.py:372
+#: addon\globalPlugins\bookLibrary\maindialog.py:385
 msgid "Add Library"
 msgstr "أضِف مكتبة"
 
 #. Translators: Message displayed when renaming a library
-#: addon\globalPlugins\bookLibrary\maindialog.py:392
+#: addon\globalPlugins\bookLibrary\maindialog.py:405
 msgid "Enter new name please"
 msgstr "أدخل الاسم الجديد من فضلك"
 
 #. Translators: Title of dialog to enter new name.
-#: addon\globalPlugins\bookLibrary\maindialog.py:394
+#: addon\globalPlugins\bookLibrary\maindialog.py:407
 msgid "rename"
 msgstr "إعادةْ التسمية"
 
 #. Translators: Message displayed upon removing a library.
-#: addon\globalPlugins\bookLibrary\maindialog.py:418
+#: addon\globalPlugins\bookLibrary\maindialog.py:431
 msgid "Are you sure you want to remove {} library, this can not be undone?"
-msgstr ""
-"هل أنت متأكد أنك تريد إزالة مكتبة {}، فهذا الإجراء لا يمكن التراجع عنه؟"
+msgstr "هل أنت متأكد أنك تريد إزالة مكتبة {}، فهذا الإجراء لا يمكن التراجع عنه؟"
 
 #. Translators: Message be displayed when a library dialog is already opened.
-#: addon\globalPlugins\bookLibrary\maindialog.py:458
+#: addon\globalPlugins\bookLibrary\maindialog.py:478
 msgid "A library dialog is already opened; Close it first please."
 msgstr "هناك محاورة لمكتبة أخرى مفتوحة; أغلقها أولاً لو سمحت."
 
@@ -447,5 +442,20 @@ msgstr ""
 "الكتاب أو المؤلف.\n"
 "تستطيع فتح المحاورة الرئيسية للإضافة بالضغط على الإختصار: "
 "nvda+control+windows+B.\n"
-"و تستطيع دائما تغيير هذا الإختصار بالذهاب إلى: قاءمةْ NVDA ثم تفضيلات ثم "
-"تخصيص إختصارات NVDA ثم مكتبةْ الكتب."
+"و تستطيع دائما تغيير هذا الإختصار بالذهاب إلى: قاءمةْ NVDA ثم تفضيلات ثم تخصيص "
+"إختصارات NVDA ثم مكتبةْ الكتب."
+
+#~ msgid "Cancel"
+#~ msgstr "إلغاء"
+
+#~ msgid "Add"
+#~ msgstr "إضافة"
+
+#~ msgid "Rename"
+#~ msgstr "إعادةْ التسمية"
+
+#~ msgid "Remove"
+#~ msgstr "إزالة"
+
+#~ msgid "OK"
+#~ msgstr "موافق"

@@ -1,3 +1,4 @@
-### Changes for version 2.2.2 ###
+### Changes for version 2.2.3 ###
 
-*	Add Turkish translation, by Umut KORKMAZ.
+*	Now we have two list of libraries, online and local libraries. 
+online libraries are only available for Arabic language  for the time being.

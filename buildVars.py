@@ -31,7 +31,7 @@ moreover with context menu  on list of books you can add, edit, remove, remove a
 you can open the main dialog of libraries with the shortcut: nvda+control+windows+b
 And as always you can change this command via: nvda menu> preferences>input gestures> book library."""),
 	# version
-	"addon_version" : "2.2.2",
+	"addon_version" : "2.2.3",
 	# Author(s)
 	"addon_author" : "ibrahim hamadeh <ibra.hamadeh@hotmail.com>",
 	# URL for the add-on documentation support
@@ -41,7 +41,7 @@ And as always you can change this command via: nvda menu> preferences>input gest
 	# Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)
 	"addon_minimumNVDAVersion" : "2019.3.0",
 	# Last NVDA version supported/tested (e.g. "2018.4.0", ideally more recent than minimum version)
-	"addon_lastTestedNVDAVersion" : "2024.1.0",
+	"addon_lastTestedNVDAVersion" : "2025.1.0",
 	# Add-on update channel (default is None, denoting stable releases,
 	# and for development releases, use "dev".)
 	# Do not change unless you know what you are doing!

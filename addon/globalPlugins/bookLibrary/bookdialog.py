@@ -356,16 +356,10 @@ class BookDialog(wx.Dialog):
 
 	def postInit(self):
 		self.accessButton.SetDefault()
-		#if not self.isLocalLibrary:
-			#self.populateWithOnlineLibrary()
-			#return
 		self.populateListBox()
 		self.focusAndSelect()
 		self.Raise()
 		self.Show()
-
-	def populateWithOnlineLibrary(self):
-		pass
 
 	def populateListBox(self, sortByAuthor= False):
 		Book.retreave_from_file()
@@ -383,7 +377,6 @@ class BookDialog(wx.Dialog):
 			else:
 				temp= sorted([(j, i) for i, j in _keys])
 				BookDialog.book_keys= [(name, author) for author, name in temp]
-				#lst= [x+u' في '+y if x else y for x,y in temp]
 				# Translators: Phrase to be put between author and name of the book.
 				AinN=_(' in ')
 				lst= [x+AinN+y if x else y for x,y in temp]
@@ -394,16 +387,30 @@ class BookDialog(wx.Dialog):
 
 	def focusAndSelect(self, bookKey= None):
 		if  self.listBox.IsEmpty():
+			self.aboutText.Disable()
+			[control.Hide() for control in (self.sizeText, self.urlText, self.otherUrlsText, self.accessButton)]
 			self.listBox.SetFocus()
 			return
+		self.Hide()
 		if not bookKey:
-			self.listBox.SetSelection(0)
+			i= 0
 		else:
 			i= self.book_keys.index(bookKey)
-			self.listBox.SetSelection(i)
-			#self.listBox.SetFocus()
-			self.Hide()
-			self.Show()
+		self.listBox.SetSelection(i)
+		key= self.book_keys[i]
+		book= Book.getBookByKey(key)
+		if book:
+			self.showOrHideAboutControl(book.about)
+			self.showOrHideControl(self.sizeText, book.size)
+			#setting the value of the url control, and show it.
+			self.urlText.SetValue(book.url)
+			self.urlText.SetSelection(0, -1)
+			self.urlText.Show()
+			# Show the other urls control if it has a value.
+			self.showOrHideControl(self.otherUrlsText, book.otherUrls)
+			self.accessButton.Show()
+			#self.Hide()
+		self.Show()
 
 	def OnRightDown(self, e):
 		obj= e.GetEventObject()
@@ -423,14 +430,9 @@ class BookDialog(wx.Dialog):
 			self.otherUrlsText.Hide()
 		else:
 			#log.info(f'self.book_keys: {self.book_keys}')
-			#try:
 			book= Book.getBookByKey(self.book_keys[i])
 			if book:
 				self.showOrHideAboutControl(book.about)
-				#setting the value of the about control
-				#self.aboutText.SetValue(book.about)
-				#self.aboutText.SetSelection(0, -1)
-				#setting the value of the size control
 				self.showOrHideControl(self.sizeText, book.size)
 				#setting the value of the url control
 				self.urlText.SetValue(book.url)

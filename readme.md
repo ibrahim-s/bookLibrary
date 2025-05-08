@@ -1,15 +1,16 @@
 # Book Library #
 
 Author: Ibrahim Hamadeh  
-NVDA compatibility: 2019.3 and later  
-Download [version 2.2.3][1]  
+NVDA compatibility: 2024.1 and later  
+Download [version 2.2.4][1]  
 
-This addon helps the user to view and access his downloadable or online books
+This addon helps the user to view and access his downloadable or online books, and for this internet connection is needed.  
 At the same time he can arrange his local books in library like way.  
 he can add, edit or remove any of his local libraries or books. 
 
 From the main dialog of libraries, you can choose the library you like and press enter on it.  
-You can in this dialog, add, Rename or remove any libraries at any time.  
+You can in this dialog, for local libraries, add, Rename or remove any libraries at any time.  
+but for online libraries or books, you can't edit that, but you still in the list of online books, you can change sorting of books, by name or Author.
 On the library dialog, you can read informations about the books, size of file, the link, and other links if present.  
 You can open Book Library dialog pressing on the command: NVDA+control+windows+b  
 You can as always change this gesture or command going to :  
@@ -18,11 +19,13 @@ NVDA menu>preferences>inputGestures>Book Library.
 ## Usage ##
 
 *	First open the main dialog pressing on the default or assigned gesture to the addon.  
-*	You will be standing on the list of libraries, choose one, and press enter.  
-*	If the list is empty, tab and add a library, and Tabing again you can Rename a library or remove it.  
+*	Two list of libraries , online and local are there
+*	choose one of them , then a library from that list, and press enter.  
+*	If the list of local libraries is empty, tab and add a library, and Tabing again you can Rename a library or remove it.  
 *	Pressing enter on it, a dialog for that library will open, showing all books(title by author) in it in a list .  
 *	Tabing on that dialog you can access the about of the book, size, download link, and other links for the book if found.  
-*	Stand on the book you want in this dialog, and press the context menu.  
+*	In case of online books, standing on the list, press the context menu, you then can sort books eithe by name or Author.
+*	In case of local books,Stand on the book you want in this dialog, and press the context menu.  
 *	From there you can add, edit, remove a book or all.  
 *	Moreover, from there you can move book to another library, and sort books, by either title or author.  
 *	If you want to access a book with the default or first link, just stand on it and press ente.  
@@ -31,6 +34,10 @@ NVDA menu>preferences>inputGestures>Book Library.
 *	Stand on the library you want to export and press the contact menu, arrow down once to Export library as, choose html or json, and press enter.  
 *	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
 *	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
+
+### Changes for version 2.2.4 ###
+
+*	Fix a bug when tabing for first time, and the about of the book is not present, focus goes wrong. Now focus goes right.
 
 ### Changes for version 2.2.3 ###
 
@@ -77,4 +84,4 @@ Doing that, so that all instances of the book library addon in the installed or 
 
 In the case of any bugs or suggestion you can [send me an email.](mailto:ibra.hamadeh@hotmail.com)
 
-[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.3/bookLibrary-2.2.3.nvda-addon
+[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.4/bookLibrary-2.2.4.nvda-addon

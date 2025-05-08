@@ -1,4 +1,3 @@
-### Changes for version 2.2.3 ###
+### Changes for version 2.2.4 ###
 
-*	Now we have two list of libraries, online and local libraries. 
-online libraries are only available for Arabic language  for the time being.
+*	Fix a bug when tabing for first time, and the about of the book is not present, focus goes wrong. Now focus goes right.

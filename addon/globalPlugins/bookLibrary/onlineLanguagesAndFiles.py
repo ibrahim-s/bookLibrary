@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# Copyright (C) 2025 ibrahim hamadeh, released under GPLv2.0
 # onlineLanguagesAndFiles.py
 
 #A dictionary that maps the language to list of library files available in that language.

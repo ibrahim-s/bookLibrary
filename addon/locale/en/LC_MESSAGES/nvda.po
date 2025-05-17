@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 'bookLibrary' '2.2.3'\n"
+"Project-Id-Version: 'bookLibrary' '2.2.5'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2025-04-20 19:26+0300\n"
-"PO-Revision-Date: 2025-04-20 19:32+0300\n"
+"POT-Creation-Date: 2025-05-17 13:22+0300\n"
+"PO-Revision-Date: 2025-05-17 13:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -20,18 +20,25 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. Translators: Message displayed in input help mode.
-#: addon\globalPlugins\bookLibrary\__init__.py:42
+#: addon\globalPlugins\bookLibrary\__init__.py:50
 msgid "Open Book Library dialog."
 msgstr ""
 
 #. Translators: Category of addon in input gestures.
+#. Translators: title of the panel
 #. Translators: Title of dialog
 #. Add-on summary, usually the user visible name of the addon.
 #. Translators: Summary for this add-on
 #. to be shown on installation and add-on information found in Add-ons Manager.
-#: addon\globalPlugins\bookLibrary\__init__.py:45
+#: addon\globalPlugins\bookLibrary\__init__.py:53
+#: addon\globalPlugins\bookLibrary\__init__.py:70
 #: addon\globalPlugins\bookLibrary\maindialog.py:267 buildVars.py:23
 msgid "Book Library"
+msgstr ""
+
+#. Translators: Label of combo box
+#: addon\globalPlugins\bookLibrary\__init__.py:78
+msgid "Choose language for online books:"
 msgstr ""
 
 #. Translators: message displayed when the user leaves the book name entry blank.
@@ -242,14 +249,13 @@ msgid "Close"
 msgstr ""
 
 #. Translators: Phrase to be put between name and author of the book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:380
+#: addon\globalPlugins\bookLibrary\bookdialog.py:374
 #: addon\globalPlugins\bookLibrary\maindialog.py:44
 msgid " by "
 msgstr ""
 
-#. lst= [x+u' في '+y if x else y for x,y in temp]
 #. Translators: Phrase to be put between author and name of the book.
-#: addon\globalPlugins\bookLibrary\bookdialog.py:388
+#: addon\globalPlugins\bookLibrary\bookdialog.py:381
 msgid " in "
 msgstr ""
 

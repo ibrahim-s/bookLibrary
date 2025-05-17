@@ -12,6 +12,12 @@ from pathlib import Path
 from.onlineLanguagesAndFiles import libraries_language_dict
 from logHandler import log
 
+#default configuration 
+configspec={
+	"libraryLanguage": "string(default='ar')",
+}
+config.conf.spec["bookLibrary"]= configspec
+
 def createTempDir():
 	''' Create a directory for online books in %temp% '''
 	path = Path(tempfile.gettempdir())/'bookLibrary-online'
@@ -45,27 +51,3 @@ def download_all_files():
 	with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
 		executor.map(download_file, files)
 	#log.info(f'book library files has been downloaded ...')
-"""
-#A dictionary that maps the language to list of library files available in that language.
-libraries_language_dict= {
-	'ar':
-	[
-	'الأدب الساخر.json', 'الأدب العالمي.json',
-	'الأدب العربي.json', 'التاريخ.json',
-	'الحديث الشريف.json', 'الروايات.json',
-	'السير والتراجم.json', 'السيرة الذاتية.json',
-	'العقائد.json','الفقه.json',
-	'القرآن وعلومه-التفاسير-التجويد.json', 'القوانين.json',
-	'المجموعات القصصية.json', 'المسرح.json',
-	'تنمية بشرية وذاتية.json', 'دواوين شعرية.json',
-	'سلاسل متنوعة.json', 'سياسة واقتصاد.json',
-	'علوم أخرى.json','علوم العربية نحو-صرف-بلاغة.json',
-	'فكر وفلسفة.json', 'كتب بالإنجليزية.json',
-	'كتب بالفرنسية.json', 'كتب دينية عامة.json'
-	],
-	'tr':
-	[
-	'turkishLibrary.json',
-	],
-	}
-"""

@@ -1,3 +1,3 @@
-### Changes for version 2.2.4 ###
+### Changes for version 2.2.5 ###
 
-*	Fix a bug when tabing for first time, and the about of the book is not present, focus goes wrong. Now focus goes right.
+*	Add setting panel, to choose language of online books or libraries. Thus make the possibility to add more books of other languages.

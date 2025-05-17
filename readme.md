@@ -2,7 +2,7 @@
 
 Author: Ibrahim Hamadeh  
 NVDA compatibility: 2024.1 and later  
-Download [version 2.2.4][1]  
+Download [version 2.2.5][1]  
 
 This addon helps the user to view and access his downloadable or online books, and for this internet connection is needed.  
 At the same time he can arrange his local books in library like way.  
@@ -34,6 +34,18 @@ NVDA menu>preferences>inputGestures>Book Library.
 *	Stand on the library you want to export and press the contact menu, arrow down once to Export library as, choose html or json, and press enter.  
 *	A dialog will open to choose the folder you want to export to, choose folder and press enter or navigate to select folder button and press on it.  
 *	That's it, an information message will be displayed telling you that the library has been exported, congratulations.  
+
+## online Books ##
+
+You can access online Books or libraries, and for this you need the presence of internet connection.
+
+Go to setting panel for the addon, tab to "choose language of online books" combo box, and select the language you wish.
+
+If some one want to upload collection of libraries in his language, he may do that by creating the libraries in local books region, then navigating to 'home directory/bookLibrary-addonFiles', he will find there the libraries he created in json format,then he may send them to me to finish the job.
+
+### Changes for version 2.2.5 ###
+
+*	Add setting panel, to choose language of online books or libraries. Thus make the possibility to add more books of other languages.
 
 ### Changes for version 2.2.4 ###
 
@@ -84,4 +96,4 @@ Doing that, so that all instances of the book library addon in the installed or 
 
 In the case of any bugs or suggestion you can [send me an email.](mailto:ibra.hamadeh@hotmail.com)
 
-[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.4/bookLibrary-2.2.4.nvda-addon
+[1]: https://github.com/ibrahim-s/bookLibrary/releases/download/v2.2.5/bookLibrary-2.2.5.nvda-addon

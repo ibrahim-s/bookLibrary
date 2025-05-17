@@ -59,12 +59,7 @@ class GlobalPlugin(GlobalPlugin):
 		else:
 			MAINDIALOG.Raise()
 
-#default configuration 
-configspec={
-	"libraryLanguage": "string(default='ar')",
-}
-config.conf.spec["bookLibrary"]= configspec
-
+# Setting panel for book library.
 class BookLibraryPanel(gui.settingsDialogs.SettingsPanel):
 	# Translators: title of the panel
 	title= _("Book Library")

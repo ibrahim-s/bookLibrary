@@ -7,7 +7,9 @@ import requests
 import threading
 import json
 import tempfile
+import config
 from pathlib import Path
+from.onlineLanguagesAndFiles import libraries_language_dict
 from logHandler import log
 
 def createTempDir():
@@ -25,9 +27,11 @@ def get_session():
 		thread_local.session = requests.Session()
 	return thread_local.session
 
+libraryLanguage = config.conf["bookLibrary"]["libraryLanguage"]
 def download_file(filename):
 	#url = 'https://younisyounis.github.io/bookLibraryFiles/'+ filename
-	url = 'https://ibrahim-h.github.io/bookLibraryFiles/ar/'+ filename
+	url = f'https://ibrahim-h.github.io/bookLibraryFiles/{libraryLanguage}/{filename}'
+	#log.info (f'url: {url}')
 	filePath = createdTemporaryDirectory/filename
 	session = get_session()
 	with session.get(url) as response:
@@ -35,13 +39,17 @@ def download_file(filename):
 	with open(filePath, 'w', encoding= 'utf-8') as f:
 		json.dump(library_dict, f, ensure_ascii= False, indent= 4)
 
-def download_all_files(files):
+def download_all_files():
+	# Getting the libraries or files for specific language.
+	files= libraries_language_dict[libraryLanguage]
 	with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
 		executor.map(download_file, files)
 	#log.info(f'book library files has been downloaded ...')
-
-#files= ['الأدب العالمي.json', 'المجموعات القصصية.json']
-files= [
+"""
+#A dictionary that maps the language to list of library files available in that language.
+libraries_language_dict= {
+	'ar':
+	[
 	'الأدب الساخر.json', 'الأدب العالمي.json',
 	'الأدب العربي.json', 'التاريخ.json',
 	'الحديث الشريف.json', 'الروايات.json',
@@ -54,4 +62,10 @@ files= [
 	'علوم أخرى.json','علوم العربية نحو-صرف-بلاغة.json',
 	'فكر وفلسفة.json', 'كتب بالإنجليزية.json',
 	'كتب بالفرنسية.json', 'كتب دينية عامة.json'
-]
+	],
+	'tr':
+	[
+	'turkishLibrary.json',
+	],
+	}
+"""
